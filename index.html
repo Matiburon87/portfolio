@@ -1,0 +1,673 @@
+
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Matías Asaro — Fullstack Developer & Team Lead. Técnico Superior en Desarrollo de Software con sólida experiencia en liderazgo y gestión de equipos.">
+    <meta name="keywords" content="fullstack developer, team lead, react, node.js, javascript, developer argentina, portfolio, análisis de sistemas">
+    <meta name="author" content="Matías Asaro">
+    
+    <meta property="og:title" content="Matías Asaro | Fullstack Developer & Team Lead">
+    <meta property="og:description" content="Portfolio profesional — Desarrollo fullstack, liderazgo de equipos y soluciones escalables.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_AR">
+    <title>Matías Asaro | Fullstack Developer & Team Lead</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fbfb',
+                            100: '#d9f5f5',
+                            200: '#b7ebeb',
+                            300: '#86dddc',
+                            400: '#4ec7c6',
+                            500: '#2fb0b0',
+                            600: '#238e90',
+                            700: '#217274',
+                            800: '#1e5a5c',
+                            900: '#1c4b4d',
+                            950: '#0c2b2d',
+                        },
+                        accent: {
+                            400: '#f07f67',
+                            500: '#e66045',
+                            600: '#d1482b',
+                        },
+                        ui: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                            950: '#020617',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        :root {
+            --step--1: clamp(0.8333rem, 0.811rem + 0.1118vw, 0.896rem);
+            --step-0: clamp(1rem, 0.9643rem + 0.1786vw, 1.1rem);
+            --step-1: clamp(1.2rem, 1.1449rem + 0.2753vw, 1.3547rem);
+            --step-2: clamp(1.44rem, 1.3582rem + 0.4093vw, 1.6693rem);
+            --step-3: clamp(1.728rem, 1.6094rem + 0.5929vw, 2.06rem);
+            --step-4: clamp(2.0736rem, 1.9051rem + 0.8427vw, 2.5463rem);
+            --step-5: clamp(2.4883rem, 2.2531rem + 1.1762vw, 3.147rem);
+            --step-6: clamp(2.986rem, 2.6625rem + 1.6174vw, 3.8897rem);
+
+            --syntax-keyword: #cc7832;
+            --syntax-string: #6a8759;
+            --syntax-number: #6897bb;
+            --syntax-func: #ffc66d;
+            --syntax-comment: #808080;
+            --syntax-bg: #2b2b2b;
+        }
+
+        body { 
+            font-family: theme('fontFamily.sans');
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Improved Skip link for accessibility */
+        .skip-link {
+            position: absolute; top: -40px; left: 0; background: theme('colors.brand.600');
+            color: white; padding: 8px; z-index: 100; transition: top 0.2s ease-out;
+        }
+        .skip-link:focus { top: 0; }
+        
+        *:focus { outline: none; }
+        *:focus-visible { outline: 2px solid theme('colors.accent.500'); outline-offset: 4px; }
+
+        /* Custom UI */
+        .ide-window {
+            background-color: var(--syntax-bg); color: #a9b7c6; font-family: theme('fontFamily.mono');
+            border-radius: 8px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 1px solid #3c3f41;
+        }
+        .ide-header { background-color: #3c3f41; padding: 8px 16px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #242627; }
+        .ide-dot { width: 10px; height: 10px; border-radius: 50%; opacity: 0.8; }
+        .ide-content { padding: 20px; font-size: 0.85rem; line-height: 1.5; }
+        .token-keyword { color: var(--syntax-keyword); }
+        .token-string { color: var(--syntax-string); }
+        .token-number { color: var(--syntax-number); }
+        .token-func { color: var(--syntax-func); }
+        .token-comment { color: var(--syntax-comment); }
+        .cursor-blink { border-right: 2px solid #a9b7c6; animation: blink 1s step-end infinite; }
+        @keyframes blink { 50% { border-color: transparent; } }
+
+        h1, h2, h3, h4, .font-mono { font-family: theme('fontFamily.mono'); }
+        h1 { font-size: var(--step-6); letter-spacing: -0.05em; line-height: 1.1; font-weight: 800; }
+        h2 { font-size: var(--step-4); letter-spacing: -0.03em; font-weight: 700; margin-bottom: 1rem; }
+        h3 { font-size: var(--step-2); font-weight: 700; }
+        .text-body { font-size: var(--step-0); }
+        .label-mono { font-family: theme('fontFamily.mono'); font-size: var(--step--1); letter-spacing: 0.05em; text-transform: uppercase; }
+
+        .btn-primary { background-color: theme('colors.brand.600'); color: theme('colors.white'); padding: 12px 24px; font-weight: 600; transition: opacity 0.2s, transform 0.2s cubic-bezier(0.25, 1, 0.5, 1); display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); }
+        .btn-accent { background-color: theme('colors.accent.500'); color: theme('colors.white'); padding: 12px 24px; font-weight: 600; transition: background-color 0.2s, transform 0.2s cubic-bezier(0.25, 1, 0.5, 1); display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn-accent:hover { background-color: theme('colors.accent.600'); transform: translateY(-2px); }
+        
+        .nav-link { position: relative; padding: 4px 0; transition: color 0.2s; }
+        .nav-link:hover { color: theme('colors.brand.600'); }
+        .dark .nav-link:hover { color: theme('colors.brand.400'); }
+        .nav-link::after { content: ''; position: absolute; width: 100%; height: 2px; bottom: 0; left: 0; background-color: currentcolor; transform: scaleX(0); transform-origin: bottom right; transition: transform 0.3s; }
+        .nav-link:hover::after { transform: scaleX(1); transform-origin: bottom left; }
+
+        .svg-icon { width: 24px; height: 24px; fill: currentColor; }
+        .touch-target { min-height: 44px; min-width: 44px; display: inline-flex; align-items: center; justify-content: center; }
+        
+        .sticky-cta { position: fixed; bottom: max(16px, env(safe-area-inset-bottom)); left: 16px; right: 16px; z-index: 40; display: none; }
+        @media (max-width: 640px) { .sticky-cta { display: block; } }
+
+        .stagger-item { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        .stagger-item.visible { opacity: 1; transform: translateY(0); }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } .stagger-item { transition: opacity 0.2s; transform: none; } .stagger-item:not(.visible) { opacity: 0; transform: none; } }
+
+        .progress-bar-bg { background-color: theme('colors.ui.200'); height: 8px; border-radius: 4px; overflow: hidden; }
+        .dark .progress-bar-bg { background-color: theme('colors.ui.800'); }
+        .progress-bar-fill { height: 100%; background-color: theme('colors.brand.500'); transform-origin: left; transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1); transform: scaleX(0); }
+        .stagger-item.visible .progress-bar-fill { transform: scaleX(0.70); }
+        
+        .proj-img-wrap { position: relative; overflow: hidden; border-radius: 0.75rem; }
+        .proj-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .proj-img-wrap:hover img { transform: scale(1.04); }
+        .proj-hover-overlay { position: absolute; inset: 0; background: rgba(14,30,48,0.70); opacity: 0; display: flex; align-items: center; justify-content: center; transition: opacity 0.3s ease; text-decoration: none; }
+        .proj-img-wrap:hover .proj-hover-overlay { opacity: 1; }
+        .proj-hover-label { color: white; font-family: theme('fontFamily.mono'); font-size: 0.875rem; font-weight: 600; letter-spacing: 0.03em; display: flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,0.4); padding: 10px 20px; border-radius: 4px; background: rgba(255,255,255,0.07); }
+
+        /* JS Arrow Carousel */
+        .carousel-viewport { overflow: hidden; width: 100%; border-radius: 0.75rem; }
+        .carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .carousel-track img { min-width: 100%; width: 100%; object-fit: cover; object-position: top center; display: block; }
+        .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s; }
+        .carousel-btn:hover { background: rgba(0,0,0,0.8); }
+        .carousel-btn.prev { left: 10px; }
+        .carousel-btn.next { right: 10px; }
+        .carousel-dots { position: absolute; bottom: 8px; left: 0; right: 0; display: flex; justify-content: center; gap: 6px; }
+        .carousel-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.5); transition: background 0.2s; cursor: pointer; }
+        .carousel-dot.active { background: white; }
+    </style>
+</head>
+
+<body class="antialiased bg-ui-50 text-ui-900 dark:bg-ui-950 dark:text-ui-100 selection:bg-brand-200 selection:text-brand-900 dark:selection:bg-brand-800 dark:selection:text-brand-50 min-h-screen">
+    <a href="#main-content" class="skip-link label-mono" data-i18n="skip_link">Saltar al contenido principal</a>
+
+    <nav class="fixed top-0 w-full z-50 bg-ui-50/90 dark:bg-ui-950/90 backdrop-blur-md border-b border-ui-200 dark:border-ui-800 transition-all duration-300" id="navbar">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex justify-between items-center">
+            <div class="flex items-center gap-3 touch-target cursor-pointer" onclick="scrollToSection('perfil')" tabindex="0" role="button">
+                <img src="assets/logo-shark.jpg" alt="Matías Asaro Logo" class="w-8 h-8 rounded shrink-0 object-cover" />
+                <div class="font-mono font-bold text-sm tracking-tight hidden sm:block"><span class="text-brand-600 dark:text-brand-400">~/</span>matias_asaro</div>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <div class="hidden md:flex gap-6 label-mono font-medium">
+                    <button onclick="scrollToSection('sobre-mi')" class="nav-link touch-target" data-i18n="nav_about">Sobre Mí</button>
+                    <button onclick="scrollToSection('experiencia')" class="nav-link touch-target" data-i18n="nav_experience">Experiencia</button>
+                    <button onclick="scrollToSection('educacion')" class="nav-link touch-target" data-i18n="nav_education">Educación</button>
+                    <button onclick="scrollToSection('proyectos')" class="nav-link touch-target" data-i18n="nav_projects">Proyectos</button>
+                </div>
+                
+                <div class="h-6 w-px bg-ui-300 dark:bg-ui-700 mx-2 hidden sm:block"></div>
+                
+                <button onclick="toggleLang()" class="font-mono text-sm touch-target font-bold text-ui-600 dark:text-ui-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors" id="lang-toggle">
+                    EN
+                </button>
+
+                <button onclick="toggleTheme()" class="touch-target rounded-md hover:bg-ui-200 dark:hover:bg-ui-800 transition-colors text-ui-600 dark:text-ui-400" aria-label="Toggle Dark Mode" id="theme-toggle">
+                    <svg class="svg-icon dark:hidden" viewBox="0 0 24 24"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0z"/></svg>
+                    <svg class="svg-icon hidden dark:block" viewBox="0 0 24 24"><path d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z"/></svg>
+                </button>
+                
+                <button onclick="toggleMobileMenu()" class="md:hidden touch-target text-ui-600 dark:text-ui-400" aria-label="Open Menu" aria-expanded="false" id="menu-toggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-ui-50 dark:bg-ui-950 hidden flex-col justify-center px-8 transition-colors" inert>
+        <div class="flex flex-col gap-8 text-2xl font-mono font-bold text-ui-900 dark:text-ui-100">
+            <button onclick="scrollToSection('sobre-mi'); toggleMobileMenu()" class="text-left py-2 hover:text-brand-600 focus-visible:text-brand-600" data-i18n="mob_about">01. Sobre Mí</button>
+            <button onclick="scrollToSection('experiencia'); toggleMobileMenu()" class="text-left py-2 hover:text-brand-600 focus-visible:text-brand-600" data-i18n="mob_experience">02. Experiencia</button>
+            <button onclick="scrollToSection('educacion'); toggleMobileMenu()" class="text-left py-2 hover:text-brand-600 focus-visible:text-brand-600" data-i18n="mob_education">03. Educación</button>
+            <button onclick="scrollToSection('proyectos'); toggleMobileMenu()" class="text-left py-2 hover:text-brand-600 focus-visible:text-brand-600" data-i18n="mob_projects">04. Proyectos</button>
+            <a href="mailto:maty_asaro@protonmail.com" class="text-left py-2 text-accent-500 mt-4" data-i18n="mob_contact">Contactame ↗</a>
+        </div>
+    </div>
+
+    <!-- Sticky CTA Mobile -->
+    <div class="sticky-cta">
+        <a href="assets/CV_Matias_Asaro.pdf" target="_blank" class="btn-primary block text-center rounded-lg shadow-lg w-full" data-i18n="download_cv">Ver CV .pdf</a>
+    </div>
+
+    <main id="main-content" class="max-w-6xl mx-auto px-6 pt-32 pb-24 space-y-32">
+        <!-- HERO -->
+        <section id="sobre-mi" class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center min-h-[70vh]">
+            <div class="lg:col-span-7 space-y-8 stagger-container">
+                <div class="stagger-item">
+                    <span class="label-mono flex items-center gap-2 text-brand-600 dark:text-brand-400">
+                        <span class="relative flex h-3 w-3">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-3 w-3 bg-brand-500"></span>
+                        </span>
+                        <span data-i18n="status">Disponible para trabajar</span>
+                    </span>
+                </div>
+                
+                <div class="stagger-item space-y-4">
+                    <h1>Matías Asaro.</h1>
+                    <h2 class="text-ui-700 dark:text-ui-300 font-sans font-medium" data-i18n="headline">Desarrollador Fullstack & Team Lead.</h2>
+                </div>
+                
+                <p class="text-body text-ui-800 dark:text-ui-200 max-w-2xl stagger-item" data-i18n="hero_desc">
+                    Construyo aplicaciones web fullstack y lidero equipos de desarrollo. Aporto <strong class="text-ui-950 dark:text-white font-medium">+10 años de experiencia liderando equipos en entornos de alta presión</strong>, ahora quiero dedicarlo a la ingeniería de software. Graduado reciente que conecta ejecución técnica con coordinación estratégica.
+                </p>
+                
+                <div class="flex flex-wrap gap-4 pt-4 stagger-item items-center">
+                    <a href="mailto:maty_asaro@protonmail.com" class="btn-accent rounded-md" data-i18n="btn_contact">Contactame</a>
+                    <a href="assets/CV_Matias_Asaro.pdf" target="_blank" class="btn-primary rounded-md hidden sm:inline-flex" data-i18n="btn_cv">Ver CV</a>
+                    <div class="flex items-center gap-2 ms-auto sm:ms-2 text-ui-600 dark:text-ui-400">
+                        <a href="https://github.com/Matiburon87" target="_blank" rel="noopener" class="touch-target hover:text-brand-600 dark:hover:text-brand-400 transition" aria-label="GitHub Profile">
+                            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/matias-asaro-910305272" target="_blank" rel="noopener" class="touch-target hover:text-brand-600 dark:hover:text-brand-400 transition" aria-label="LinkedIn Profile">
+                            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-5 stagger-item hidden md:block">
+                <div class="ide-window">
+                    <div class="ide-header">
+                        <div class="ide-dot bg-[#ff5f56]"></div>
+                        <div class="ide-dot bg-[#ffbd2e]"></div>
+                        <div class="ide-dot bg-[#27c93f]"></div>
+                        <span class="text-xs text-[#808080] ml-2">Developer.js</span>
+                    </div>
+                    <div class="ide-content">
+                        <p><span class="token-keyword">import</span> { Developer, Leader } <span class="token-keyword">from</span> <span class="token-string">'@matias/core'</span>;</p>
+                        <br>
+                        <p><span class="token-keyword">class</span> <span class="token-func">MatiasAsaro</span> <span class="token-keyword">extends</span> <span class="token-func">Developer</span> {</p>
+                        <p>&nbsp;&nbsp;<span class="token-keyword">constructor</span>() {</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token-keyword">super</span>();</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token-keyword">this</span>.role = <span class="token-string">'Fullstack Dev'</span>;</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token-keyword">this</span>.base = <span class="token-string">'Mar del Plata, ARG'</span>;</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token-keyword">this</span>.englishLevel = {</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reading: <span class="token-string">'C1'</span>,</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;speaking: <span class="token-string">'B2'</span></p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;};</p>
+                        <p>&nbsp;&nbsp;}</p>
+                        <br>
+                        <p>&nbsp;&nbsp;<span class="token-func">getLeadershipExperience</span>() {</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token-keyword">return</span> {</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;years: <span class="token-number">10</span>,</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;teamSize: <span class="token-number">20</span>,</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;highPressureEnv: <span class="token-keyword">true</span></p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;};</p>
+                        <p>&nbsp;&nbsp;}</p>
+                        <p>}<span class="cursor-blink"></span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE -->
+        <section id="experiencia" class="stagger-container">
+            <h2 class="stagger-item"><span class="text-brand-600 dark:text-brand-400">01.</span> <span data-i18n="exp_title">Experiencia Profesional</span></h2>
+            
+            <div class="mt-12 space-y-16">
+                <!-- IT Freelance -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8 stagger-item">
+                    <div class="md:col-span-1">
+                        <p class="font-mono text-sm text-ui-600 dark:text-ui-400" data-i18n="exp_date_1">2024 — Presente</p>
+                    </div>
+                    <div class="md:col-span-3 space-y-4">
+                        <div class="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4">
+                            <h3 data-i18n="exp_role_1">Desarrollador Fullstack & Team Lead</h3>
+                            <span class="label-mono text-brand-600 dark:text-brand-400">Freelance</span>
+                        </div>
+                        <ul class="list-none space-y-3 text-ui-800 dark:text-ui-200 pl-0">
+                            <li class="relative pl-6 before:content-['▹'] before:absolute before:left-0 before:text-brand-600 dark:before:text-brand-400" data-i18n="exp_1_li1">Arquitectura y desarrollo plataforma E-commerce (Stock, Pagos QR, Panel admin).</li>
+                            <li class="relative pl-6 before:content-['▹'] before:absolute before:left-0 before:text-brand-600 dark:before:text-brand-400" data-i18n="exp_1_li2">Creación de landing pages orientadas a negocios, enfocadas en conversión y performance.</li>
+                            <li class="relative pl-6 before:content-['▹'] before:absolute before:left-0 before:text-brand-600 dark:before:text-brand-400" data-i18n="exp_1_li3">Automatización de procesos (n8n) e integraciones de flujos IA.</li>
+                            <li class="relative pl-6 before:content-['▹'] before:absolute before:left-0 before:text-brand-600 dark:before:text-brand-400" data-i18n="exp_1_li4">Liderazgo técnico en proyectos colaborativos y mentoría de desarrolladores junior.</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-2 pt-2 text-ui-700 dark:text-ui-300">
+                            <span class="px-3 py-1 bg-ui-200 dark:bg-ui-800 text-xs font-mono rounded">React</span>
+                            <span class="px-3 py-1 bg-ui-200 dark:bg-ui-800 text-xs font-mono rounded">Node.js</span>
+                            <span class="px-3 py-1 bg-ui-200 dark:bg-ui-800 text-xs font-mono rounded">MySQL</span>
+                            <span class="px-3 py-1 bg-ui-200 dark:bg-ui-800 text-xs font-mono rounded">Tailwind</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Casino -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8 stagger-item">
+                    <div class="md:col-span-1">
+                        <p class="font-mono text-sm text-ui-600 dark:text-ui-400" data-i18n="exp_date_2">2014 — Presente (Noche)</p>
+                    </div>
+                    <div class="md:col-span-3 space-y-4">
+                        <div class="flex flex-col gap-1">
+                            <h3 data-i18n="exp_role_2">Croupier </h3>
+                            <span class="label-mono text-brand-600 dark:text-brand-400">Casino Central — Mar del Plata</span>
+                        </div>
+                        <div class="p-4 bg-ui-200/50 dark:bg-ui-800/50 rounded-lg border border-ui-200 dark:border-ui-700 my-4 text-ui-900 dark:text-ui-50">
+                            <p class="text-sm font-medium"><strong class="text-brand-600 dark:text-brand-400" data-i18n="exp_2_note_title">Liderazgo bajo presión:</strong> <span data-i18n="exp_2_note_desc">Coordinación de equipos (+20 personas) y toma de decisiones financieras en tiempo real.</span></p>
+                        </div>
+                        <ul class="list-none space-y-3 text-ui-800 dark:text-ui-200 pl-0">
+                            <li class="relative pl-6 before:content-['▹'] before:absolute before:left-0 before:text-brand-600 dark:before:text-brand-400" data-i18n="exp_2_li1">Operador de mesa de BlackJack y Craps; requiere cálculo mental y ejecución en tiempo real.</li>
+                            <li class="relative pl-6 before:content-['▹'] before:absolute before:left-0 before:text-brand-600 dark:before:text-brand-400" data-i18n="exp_2_li2">Delegado sindical: negociación de intereses de las partes, resolución de disputas.</li>
+                            <li class="relative pl-6 before:content-['▹'] before:absolute before:left-0 before:text-brand-600 dark:before:text-brand-400" data-i18n="exp_2_li3">Mediación de conflictos con clientes VIP demostrando gran comunicación asertiva.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EDUCATION -->
+        <section id="educacion" class="stagger-container">
+            <h2 class="stagger-item"><span class="text-brand-600 dark:text-brand-400">02.</span> <span data-i18n="edu_title">Formación & Cursos Completados</span></h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-12">
+                <!-- Formal Education -->
+                <div class="space-y-8">
+                    <div class="stagger-item space-y-3 border-l-2 border-brand-500 pl-6">
+                        <span class="label-mono text-xs bg-ui-200 dark:bg-ui-800 px-2 py-1 rounded inline-block text-ui-900 dark:text-ui-50" data-i18n="edu_expected">Previsto 2026/2027</span>
+                        <h3 class="text-xl">Tecnicatura Superior en Análisis de Sistemas</h3>
+                        <p class="font-mono text-sm text-brand-600 dark:text-brand-400">ISET, Mar del Plata</p>
+                        
+                        <div class="pt-2">
+                            <div class="flex justify-between text-xs font-mono mb-1 text-ui-600 dark:text-ui-400">
+                                <span data-i18n="edu_progress">Progreso actual</span>
+                                <span>~70%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stagger-item space-y-2 border-l-2 border-ui-300 dark:border-ui-700 pl-6 hover:border-brand-400 transition-colors">
+                        <span class="label-mono text-xs bg-ui-200 dark:bg-ui-800 px-2 py-1 rounded inline-block text-ui-900 dark:text-ui-50" data-i18n="edu_grad">Graduado 2025</span>
+                        <h3 class="text-xl">Técnico Superior en Desarrollo de Software</h3>
+                        <p class="font-mono text-sm text-brand-600 dark:text-brand-400">ISFT N°204, Mar del Plata</p>
+                        <p class="text-sm text-ui-800 dark:text-ui-200 pt-2" data-i18n="edu_tsds">Bases sólidas en POO (Java, C++), Bases de datos, UML, e Ingeniería del Software.</p>
+                    </div>
+                </div>
+
+                <!-- Certifications -->
+                <div class="space-y-6">
+                    <h3 class="text-lg font-mono font-medium border-b border-ui-200 dark:border-ui-700 pb-2 stagger-item text-ui-900 dark:text-ui-50" data-i18n="certs_title">Certificados Oficiales</h3>
+                    
+                    <!-- Cert BIG -->
+                    <a href="assets/Matias Alberto _maty_asaro@protonmail.com.pdf" target="_blank" class="stagger-item flex flex-col gap-1 p-4 bg-white dark:bg-ui-900/50 rounded-lg shadow-sm border border-ui-200 dark:border-ui-800 hover:border-brand-500 transition-colors group">
+                        <div class="flex justify-between items-start">
+                            <h4 class="font-bold text-base m-0 text-ui-900 dark:text-ui-50 group-hover:text-brand-600 dark:group-hover:text-brand-400" data-i18n="cert_1">Iniciación al desarrollo con IA</h4>
+                            <span class="font-mono text-xs text-ui-600 dark:text-ui-400">2025</span>
+                        </div>
+                        <p class="text-sm text-brand-600 dark:text-brand-400 flex justify-between items-center">BIG School <span class="text-xs text-ui-500 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">Ver PDF ↗</span></p>
+                    </a>
+
+                    <!-- Cert Alura con PDF -->
+                    <a href="assets/inmersion IA gemini.pdf" target="_blank" class="stagger-item flex flex-col gap-1 p-4 bg-white dark:bg-ui-900/50 rounded-lg shadow-sm border border-ui-200 dark:border-ui-800 hover:border-brand-500 transition-colors group">
+                        <div class="flex justify-between items-start">
+                            <h4 class="font-bold text-base m-0 text-ui-900 dark:text-ui-50 group-hover:text-brand-600 dark:group-hover:text-brand-400" data-i18n="cert_2">Inmersión IA con Google Gemini</h4>
+                            <span class="font-mono text-xs text-ui-600 dark:text-ui-400">2025</span>
+                        </div>
+                        <p class="text-sm text-brand-600 dark:text-brand-400 flex justify-between items-center">Alura <span class="text-xs text-ui-500 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">Ver PDF ↗</span></p>
+                    </a>
+
+                    <!-- Cert Codo a Codo -->
+                    <a href="assets/Diploma_CAC.pdf" target="_blank" class="stagger-item flex flex-col gap-1 p-4 bg-white dark:bg-ui-900/50 rounded-lg shadow-sm border border-ui-200 dark:border-ui-800 hover:border-brand-500 transition-colors group">
+                        <div class="flex justify-between items-start">
+                            <h4 class="font-bold text-base m-0 text-ui-900 dark:text-ui-50 group-hover:text-brand-600 dark:group-hover:text-brand-400" data-i18n="cert_3">Desarrollador Web (Javascript/Node.js)</h4>
+                            <span class="font-mono text-xs text-ui-600 dark:text-ui-400">2024</span>
+                        </div>
+                        <p class="text-sm text-brand-600 dark:text-brand-400 flex justify-between items-center">Codo a Codo 4.0 <span class="text-xs text-ui-500 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">Ver PDF ↗</span></p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section id="proyectos" class="stagger-container">
+            <h2 class="stagger-item"><span class="text-brand-600 dark:text-brand-400">03.</span> <span data-i18n="proj_title">Proyectos</span></h2>
+            
+            <div class="mt-12 space-y-24">
+                <!-- Featured: Isadora -->
+                <article class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center stagger-item">
+                    <div class="lg:col-span-7 relative z-10 lg:order-2">
+                        <div class="proj-img-wrap aspect-[16/10] shadow-lg border border-ui-200 dark:border-ui-700" id="isadora-carousel" style="position:relative">
+                            <div class="carousel-viewport h-full">
+                                <div class="carousel-track h-full" id="isadora-track">
+                                    <img src="assets/screenshot-isadora/isadora principal.jpg" alt="Isadora Petshop — Página principal" loading="lazy">
+                                    <img src="assets/screenshot-isadora/isadora filtros busqueda.jpg" alt="Isadora Petshop — Filtros" loading="lazy">
+                                    <img src="assets/screenshot-isadora/isadora carrito.jpg" alt="Isadora Petshop — Carrito" loading="lazy">
+                                    <img src="assets/screenshot-isadora/isadora contacto.jpg" alt="Isadora Petshop — Contacto" loading="lazy">
+                                    <img src="assets/screenshot-isadora/isadora admin.jpg" alt="Isadora Petshop — Admin" loading="lazy">
+                                </div>
+                            </div>
+                            <button class="carousel-btn prev" id="isadora-prev" aria-label="Anterior">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                            </button>
+                            <button class="carousel-btn next" id="isadora-next" aria-label="Siguiente">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </button>
+                            <div class="carousel-dots" id="isadora-dots"></div>
+                            <a href="https://isadora.ninnotech.com/store" target="_blank" rel="noopener" class="proj-hover-overlay" aria-label="Ver sitio en vivo" style="pointer-events:none" id="isadora-link">
+                                <span class="proj-hover-label">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                    Ver sitio en vivo
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:col-span-5 relative z-20 space-y-4 lg:order-1 lg:text-left">
+                        <p class="label-mono text-brand-600 dark:text-brand-400">Featured Project</p>
+                        <h3 class="text-2xl text-ui-900 dark:text-ui-50">Isadora Petshop</h3>
+                        <div class="p-6 bg-white dark:bg-ui-900/90 backdrop-blur rounded-lg shadow-xl border border-ui-200 dark:border-ui-700">
+                            <p class="text-sm text-ui-800 dark:text-ui-200" data-i18n="proj_1_desc">
+                                Plataforma E-commerce Fullstack desde cero. Inventario completo para gestión, pagos por QR rápido, y admin dashboard seguro con reportes de venta a medida.
+                            </p>
+                        </div>
+                        <div class="flex gap-4 font-mono text-xs text-ui-600 dark:text-ui-400">
+                            <span>React</span><span>Node.js</span><span>MySQL</span><span>Tailwind</span>
+                        </div>
+                    </div>
+                </article>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Project 2: Puerto Peli -->
+                    <article class="rounded-xl border border-ui-200 dark:border-ui-800 overflow-hidden hover:-translate-y-2 transition-transform duration-300 stagger-item flex flex-col bg-white dark:bg-ui-900/50">
+                        <div class="proj-img-wrap h-48">
+                            <img src="assets/screenshot-puerto pelis/principal.jpg" alt="Puerto Peli-Series — Principal" loading="lazy">
+                            <a href="https://puerto-peli-series.netlify.app/" target="_blank" rel="noopener" class="proj-hover-overlay" aria-label="Ver sitio en vivo">
+                                <span class="proj-hover-label">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                    Ver en vivo
+                                </span>
+                            </a>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-lg mb-2 text-ui-900 dark:text-ui-50">Puerto Peli-Series</h3>
+                            <p class="text-sm text-ui-800 dark:text-ui-200 flex-grow" data-i18n="proj_2_desc">
+                                Aplicación para exploración de catálogos multimedia con APIs externas. Incluye UI responsive, debounce en las búsquedas y páginas de detalle dinámicas.
+                            </p>
+                            <div class="font-mono text-xs text-ui-600 dark:text-ui-400 mt-4 flex gap-3"><span>React</span> <span>REST API</span> <span>CSS3</span></div>
+                        </div>
+                    </article>
+
+                    <!-- Project 3: Estudio Arquitectura -->
+                    <article class="rounded-xl border border-ui-200 dark:border-ui-800 overflow-hidden hover:-translate-y-2 transition-transform duration-300 stagger-item flex flex-col bg-white dark:bg-ui-900/50">
+                        <div class="proj-img-wrap h-48">
+                            <img src="assets/screenshot-P C Arquitectura/pc arquitectura.jpg" alt="Estudio Arquitectura PC — Landing" loading="lazy">
+                            <a href="https://estudioarquitecturapc.vercel.app/" target="_blank" rel="noopener" class="proj-hover-overlay" aria-label="Ver sitio en vivo">
+                                <span class="proj-hover-label">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                    Ver en vivo
+                                </span>
+                            </a>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-lg mb-2 text-ui-900 dark:text-ui-50">Estudio Arquitectura PC</h3>
+                            <p class="text-sm text-ui-800 dark:text-ui-200 flex-grow" data-i18n="proj_3_desc">
+                                Landing page profesional optimizada para performance y lead generation vía WhatsApp, incluyendo protección anti-bots nativa.
+                            </p>
+                            <div class="font-mono text-xs text-ui-600 dark:text-ui-400 mt-4 flex gap-3"><span>HTML5</span> <span>JS</span> <span>Tailwind</span></div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="text-center py-8 text-sm font-mono text-ui-500 dark:text-ui-500 space-y-2">
+        <p>Built by Matías Asaro &middot; 2026</p>
+        <p>Mar del Plata, ARG</p>
+    </footer>
+
+    <!-- LOGIC (Translations & Theme/Menu) -->
+    <script>
+        // i18n
+        const dict = {
+            'es': {
+                'skip_link': 'Saltar al contenido principal',
+                'nav_about': 'Sobre Mí', 'nav_experience': 'Experiencia', 'nav_education': 'Educación', 'nav_projects': 'Proyectos',
+                'mob_about': '01. Sobre Mí', 'mob_experience': '02. Experiencia', 'mob_education': '03. Educación', 'mob_projects': '04. Proyectos', 'mob_contact': 'Contactame ↗',
+                'download_cv': 'Ver CV .pdf',
+                'status': 'Disponible para trabajar',
+                'headline': 'Desarrollador Fullstack & Team Lead.',
+                'hero_desc': 'Construyo aplicaciones web fullstack y lidero equipos de desarrollo. Aporto <strong class="text-ui-950 dark:text-white font-medium">+10 años de experiencia liderando equipos en entornos de alta presión</strong>,ahora quiero aplicarlo a la ingeniería de software. Graduado reciente que conecta ejecución técnica con coordinación estratégica.',
+                'btn_contact': 'Contactame', 'btn_cv': 'Ver CV',
+                'exp_title': 'Experiencia Profesional',
+                'exp_date_1': '2024 — Presente', 'exp_role_1': 'Desarrollador Fullstack & Team Lead',
+                'exp_1_li1': 'Arquitectura y desarrollo plataforma E-commerce (Stock, Pagos QR, Panel admin).',
+                'exp_1_li2': 'Creación de landing pages orientadas a negocios, enfocadas en conversión y performance.',
+                'exp_1_li3': 'Automatización de procesos (n8n) e integraciones de flujos IA.',
+                'exp_1_li4': 'Liderazgo técnico en proyectos colaborativos y mentoría de desarrolladores junior.',
+                'exp_date_2': '2014 — Presente (Noche)', 'exp_role_2': 'Croupier',
+                'exp_2_note_title': 'Liderazgo bajo presión:', 'exp_2_note_desc': 'Coordinación de equipos (+20 personas) y toma de decisiones financieras en tiempo real.',
+                'exp_2_li1': 'Operador de mesa de BlackJack y Craps; requiere cálculo mental y ejecución en tiempo real.',
+                'exp_2_li2': 'Delegado sindical: negociación de intereses de las partes, resolución de disputas.',
+                'exp_2_li3': 'Mediación de conflictos con clientes VIP demostrando gran comunicación asertiva.',
+                'edu_title': 'Formación & Cursos Completados', 
+                'edu_expected': 'Previsto 2026/2027', 'edu_progress': 'Progreso actual',
+                'edu_grad': 'Graduado 2025', 'edu_tsds': 'Bases sólidas en POO (Java, C++), Bases de datos, UML, e Ingeniería del Software.',
+                'certs_title': 'Certificados Oficiales',
+                'cert_1': 'Iniciación al desarrollo con IA', 'cert_2': 'Inmersión IA con Google Gemini', 'cert_3': 'Desarrollador Web (Javascript/Node.js)',
+                'proj_title': 'Proyectos',
+                'proj_1_desc': 'Plataforma E-commerce Fullstack desde cero. Inventario completo para gestión, pagos por QR rápido, y admin dashboard seguro con reportes de venta a medida.',
+                'proj_2_desc': 'Aplicación para exploración de catálogos multimedia con APIs externas. Incluye UI responsive, debounce en las búsquedas y páginas de detalle dinámicas.',
+                'proj_3_desc': 'Landing page profesional optimizada para performance y lead generation vía WhatsApp, incluyendo protección anti-bots nativa.'
+            },
+            'en': {
+                'skip_link': 'Skip to main content',
+                'nav_about': 'About', 'nav_experience': 'Experience', 'nav_education': 'Education', 'nav_projects': 'Projects',
+                'mob_about': '01. About', 'mob_experience': '02. Experience', 'mob_education': '03. Education', 'mob_projects': '04. Projects', 'mob_contact': 'Contact Me ↗',
+                'download_cv': 'View CV .pdf',
+                'status': 'Available for Work',
+                'headline': 'Software Developer & Team Lead.',
+                'hero_desc': 'I build fullstack web applications and lead development teams. Bringing <strong class="text-ui-950 dark:text-white font-medium">10+ years of high-pressure leadership experience</strong> to software engineering. Recent graduate connecting technical execution with team coordination.',
+                'btn_contact': 'Get In Touch', 'btn_cv': 'View CV',
+                'exp_title': 'Professional Experience',
+                'exp_date_1': '2024 — Present', 'exp_role_1': 'Fullstack Developer & Team Lead',
+                'exp_1_li1': 'Architected and developed a fullstack E-commerce platform (Inventory, QR Payments, Admin Panel).',
+                'exp_1_li2': 'Created business-focused landing pages optimized for conversions and performance.',
+                'exp_1_li3': 'Designed n8n automations and AI workflow integrations.',
+                'exp_1_li4': 'Acted as Technical Lead in collaborative academic projects, mentoring junior developers.',
+                'exp_date_2': '2014 — Present (Night Shift)', 'exp_role_2': 'Croupier',
+                'exp_2_note_title': 'Leadership Under Pressure:', 'exp_2_note_desc': 'Coordinated teams of 20+ people and made real-time financial decisions.',
+                'exp_2_li1': 'Table operator (BlackJack, Craps) requiring rapid mental calculation and execution.',
+                'exp_2_li2': 'Union delegate handling stakeholder negotiation, dispute resolution, and team advocacy.',
+                'exp_2_li3': 'Mediated financial conflicts with high-profile clients demonstrating assertive communication.',
+                'edu_title': 'Education & Continuous Learning',
+                'edu_expected': 'Expected 2026/2027', 'edu_progress': 'Progress Tracking',
+                'edu_grad': 'Graduated 2025', 'edu_tsds': 'Comprehensive foundation in OOP (Java, C++), Database Design, UML, and Software Engineering.',
+                'certs_title': 'Certificates & Bootcamps',
+                'cert_1': 'AI Development Initiation', 'cert_2': 'Google Gemini AI Immersion', 'cert_3': 'Web Developer (Javascript/Node.js)',
+                'proj_title': 'Selected Projects',
+                'proj_1_desc': 'Full-stack e-commerce platform built from scratch. Features complete inventory management, QR payments, and a secure admin dashboard.',
+                'proj_2_desc': 'Multimedia catalog exploration application interacting with external movie DB APIs. Features responsive UI and debounced search.',
+                'proj_3_desc': 'Professional landing page designed for an architecture firm. Focuses on performance, WhatsApp integration, and anti-bot validation.'
+            }
+        };
+
+        let currentLang = 'es';
+        function toggleLang() {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+            document.getElementById('lang-toggle').innerText = currentLang === 'es' ? 'EN' : 'ES'; 
+            document.documentElement.lang = currentLang;
+            
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[currentLang][key]) {
+                    el.innerHTML = dict[currentLang][key]; // innerHTML allows bold tags
+                }
+            });
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                html.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        }
+        
+        // Initial setup
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const toggle = document.getElementById('menu-toggle');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden'); menu.classList.add('flex');
+                menu.removeAttribute('inert'); document.body.style.overflow = 'hidden';
+                toggle.setAttribute('aria-expanded', 'true');
+            } else {
+                menu.classList.add('hidden'); menu.classList.remove('flex');
+                menu.setAttribute('inert', ''); document.body.style.overflow = '';
+                toggle.setAttribute('aria-expanded', 'false');
+            }
+        }
+        function scrollToSection(id) { document.getElementById(id).scrollIntoView({ behavior: 'smooth' }); }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); } });
+            }, { root: null, rootMargin: '0px', threshold: 0.1 });
+            document.querySelectorAll('.stagger-item').forEach(el => observer.observe(el));
+
+            // Isadora arrow carousel
+            const track    = document.getElementById('isadora-track');
+            const prevBtn  = document.getElementById('isadora-prev');
+            const nextBtn  = document.getElementById('isadora-next');
+            const dotsWrap = document.getElementById('isadora-dots');
+            const link     = document.getElementById('isadora-link');
+            const imgs     = track ? track.querySelectorAll('img') : [];
+            let current    = 0;
+
+            if (track && imgs.length) {
+                // build dots
+                imgs.forEach((_, i) => {
+                    const d = document.createElement('div');
+                    d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+                    d.addEventListener('click', () => goTo(i));
+                    dotsWrap.appendChild(d);
+                });
+
+                function goTo(n) {
+                    current = (n + imgs.length) % imgs.length;
+                    track.style.transform = `translateX(-${current * 100}%)`;
+                    dotsWrap.querySelectorAll('.carousel-dot').forEach((d, i) =>
+                        d.classList.toggle('active', i === current));
+                }
+
+                prevBtn.addEventListener('click', e => { e.stopPropagation(); goTo(current - 1); });
+                nextBtn.addEventListener('click', e => { e.stopPropagation(); goTo(current + 1); });
+
+                // hover overlay — show only when not hovering buttons
+                const wrap = document.getElementById('isadora-carousel');
+                wrap.addEventListener('mouseenter', () => { link.style.pointerEvents = 'auto'; link.style.opacity = '1'; });
+                wrap.addEventListener('mouseleave', () => { link.style.pointerEvents = 'none'; link.style.opacity = '0'; });
+                [prevBtn, nextBtn].forEach(btn => {
+                    btn.addEventListener('mouseenter', e => { e.stopPropagation(); link.style.pointerEvents = 'none'; link.style.opacity = '0'; });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

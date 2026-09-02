@@ -7,6 +7,7 @@ tmp_js.txt
 _isodora_carousel_v2.js
 _isadora_carousel.js
 _isodora_carousel.js
+output/
 *.log
 .gemini/
 .agents/

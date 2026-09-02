@@ -186,6 +186,7 @@
                     <button onclick="scrollToSection('sobre-mi')" class="nav-link touch-target" data-i18n="nav_about">Sobre Mí</button>
                     <button onclick="scrollToSection('experiencia')" class="nav-link touch-target" data-i18n="nav_experience">Experiencia</button>
                     <button onclick="scrollToSection('educacion')" class="nav-link touch-target" data-i18n="nav_education">Educación</button>
+                    <button onclick="scrollToSection('servicios')" class="nav-link touch-target" data-i18n="nav_services">Servicios</button>
                     <button onclick="scrollToSection('proyectos')" class="nav-link touch-target" data-i18n="nav_projects">Proyectos</button>
                 </div>
                 
@@ -213,6 +214,7 @@
             <button onclick="scrollToSection('sobre-mi'); toggleMobileMenu()" class="text-left py-2 hover:text-brand-600 focus-visible:text-brand-600" data-i18n="mob_about">01. Sobre Mí</button>
             <button onclick="scrollToSection('experiencia'); toggleMobileMenu()" class="text-left py-2 hover:text-brand-600 focus-visible:text-brand-600" data-i18n="mob_experience">02. Experiencia</button>
             <button onclick="scrollToSection('educacion'); toggleMobileMenu()" class="text-left py-2 hover:text-brand-600 focus-visible:text-brand-600" data-i18n="mob_education">03. Educación</button>
+            <button onclick="scrollToSection('servicios'); toggleMobileMenu()" class="text-left py-2 hover:text-brand-600 focus-visible:text-brand-600" data-i18n="mob_services">03. Servicios</button>
             <button onclick="scrollToSection('proyectos'); toggleMobileMenu()" class="text-left py-2 hover:text-brand-600 focus-visible:text-brand-600" data-i18n="mob_projects">04. Proyectos</button>
             <a href="mailto:maty_asaro@protonmail.com" class="text-left py-2 text-accent-500 mt-4" data-i18n="mob_contact">Contactame ↗</a>
         </div>
@@ -413,9 +415,60 @@
             </div>
         </section>
 
+        <!-- SERVICES -->
+        <section id="servicios" class="stagger-container">
+            <h2 class="stagger-item"><span class="text-brand-600 dark:text-brand-400">03.</span> <span data-i18n="serv_title">Servicios</span></h2>
+
+            <p class="text-ui-700 dark:text-ui-300 max-w-3xl mt-4 stagger-item text-body" data-i18n="serv_subtitle">
+                Impulso tu negocio o proyecto con herramientas de inteligencia artificial reales, no humo. Integro IA, automatización y desarrollo web para que tengas un sistema que trabaja por vos.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+                <!-- Service 1 -->
+                <div class="stagger-item rounded-xl border border-ui-200 dark:border-ui-800 bg-white dark:bg-ui-900/50 p-6 hover:border-brand-400 transition-colors">
+                    <div class="text-3xl mb-3">🤖</div>
+                    <h3 class="text-xl text-ui-900 dark:text-ui-50 mb-2" data-i18n="serv_1_title">IA para tu negocio</h3>
+                    <p class="text-sm text-ui-800 dark:text-ui-200" data-i18n="serv_1_desc">Integro modelos de IA, flujos automáticos y análisis de datos para automatizar tareas repetitivas, generar informes o atender clientes sin intervención humana.</p>
+                    <div class="flex flex-wrap gap-2 mt-4 font-mono text-xs text-ui-600 dark:text-ui-400">
+                        <span>n8n</span><span>AutoML</span><span>RAG</span><span>APIs IA</span>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="stagger-item rounded-xl border border-ui-200 dark:border-ui-800 bg-white dark:bg-ui-900/50 p-6 hover:border-brand-400 transition-colors">
+                    <div class="text-3xl mb-3">🗂️</div>
+                    <h3 class="text-xl text-ui-900 dark:text-ui-50 mb-2" data-i18n="serv_2_title">Vaults & Agentes IA</h3>
+                    <p class="text-sm text-ui-800 dark:text-ui-200" data-i18n="serv_2_desc">Creo bóvedas de conocimiento conectadas a tus documentos y datos, y agentes autónomos que responden, ejecutan tareas y coordinan workflows 24/7.</p>
+                    <div class="flex flex-wrap gap-2 mt-4 font-mono text-xs text-ui-600 dark:text-ui-400">
+                        <span>Obsidian</span><span>RAG</span><span>Agents</span><span>MCP</span>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="stagger-item rounded-xl border border-ui-200 dark:border-ui-800 bg-white dark:bg-ui-900/50 p-6 hover:border-brand-400 transition-colors">
+                    <div class="text-3xl mb-3">💬</div>
+                    <h3 class="text-xl text-ui-900 dark:text-ui-50 mb-2" data-i18n="serv_3_title">Chatbots inteligentes</h3>
+                    <p class="text-sm text-ui-800 dark:text-ui-200" data-i18n="serv_3_desc">Asistentes conversacionales entrenados con tu información: ventas, soporte, turnos o presupuestos. Funcionan en web, WhatsApp o Telegram.</p>
+                    <div class="flex flex-wrap gap-2 mt-4 font-mono text-xs text-ui-600 dark:text-ui-400">
+                        <span>LLMs</span><span>Embeddings</span><span>WhatsApp</span><span>Telegram</span>
+                    </div>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="stagger-item rounded-xl border border-ui-200 dark:border-ui-800 bg-white dark:bg-ui-900/50 p-6 hover:border-brand-400 transition-colors">
+                    <div class="text-3xl mb-3">⚙️</div>
+                    <h3 class="text-xl text-ui-900 dark:text-ui-50 mb-2" data-i18n="serv_4_title">Skills & Tools / Automatización</h3>
+                    <p class="text-sm text-ui-800 dark:text-ui-200" data-i18n="serv_4_desc">Desarrollo skills y herramientas a medida que se conectan entre sí: scraping, informes, control de datos, alarmas y todo lo que puedas imaginar.</p>
+                    <div class="flex flex-wrap gap-2 mt-4 font-mono text-xs text-ui-600 dark:text-ui-400">
+                        <span>Python</span><span>APIs</span><span>Cron</span><span>Webhooks</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- PROJECTS -->
         <section id="proyectos" class="stagger-container">
-            <h2 class="stagger-item"><span class="text-brand-600 dark:text-brand-400">03.</span> <span data-i18n="proj_title">Proyectos</span></h2>
+            <h2 class="stagger-item"><span class="text-brand-600 dark:text-brand-400">04.</span> <span data-i18n="proj_title">Proyectos</span></h2>
             
             <div class="mt-12 space-y-24">
                 <!-- Featured: Isadora -->
@@ -611,8 +664,9 @@
             'es': {
                 'skip_link': 'Saltar al contenido principal',
                 'nav_about': 'Sobre Mí', 'nav_experience': 'Experiencia', 'nav_education': 'Educación', 'nav_projects': 'Proyectos',
-                'mob_about': '01. Sobre Mí', 'mob_experience': '02. Experiencia', 'mob_education': '03. Educación', 'mob_projects': '04. Proyectos', 'mob_contact': 'Contactame ↗',
+                'mob_about': '01. Sobre Mí', 'mob_experience': '02. Experiencia', 'mob_services': '03. Servicios', 'mob_projects': '04. Proyectos',
                 'download_cv': 'Ver CV .pdf',
+                'nav_services': 'Servicios',
                 'status': 'Disponible para trabajar',
                 'headline': 'Desarrollador Fullstack & Team Lead.',
                 'hero_desc': 'Construyo aplicaciones web fullstack y lidero equipos de desarrollo. Aporto <strong class="text-ui-950 dark:text-white font-medium">+10 años de experiencia liderando equipos en entornos de alta presión</strong>,ahora quiero aplicarlo a la ingeniería de software. Graduado reciente que conecta ejecución técnica con coordinación estratégica.',
@@ -629,6 +683,12 @@
                 'exp_2_li2': 'Delegado sindical: negociación de intereses de las partes, resolución de disputas.',
                 'exp_2_li3': 'Mediación de conflictos con clientes VIP demostrando gran comunicación asertiva.',
                 'edu_title': 'Formación & Cursos Completados', 
+                'serv_title': 'Servicios',
+                'serv_subtitle': 'Impulso tu negocio o proyecto con herramientas de inteligencia artificial reales, no humo. Integro IA, automatización y desarrollo web para que tengas un sistema que trabaja por vos.',
+                'serv_1_title': 'IA para tu negocio', 'serv_1_desc': 'Integro modelos de IA, flujos automáticos y análisis de datos para automatizar tareas repetitivas, generar informes o atender clientes sin intervención humana.',
+                'serv_2_title': 'Vaults & Agentes IA', 'serv_2_desc': 'Creo bóvedas de conocimiento conectadas a tus documentos y datos, y agentes autónomos que responden, ejecutan tareas y coordinan workflows 24/7.',
+                'serv_3_title': 'Chatbots inteligentes', 'serv_3_desc': 'Asistentes conversacionales entrenados con tu información: ventas, soporte, turnos o presupuestos. Funcionan en web, WhatsApp o Telegram.',
+                'serv_4_title': 'Skills & Tools / Automatización', 'serv_4_desc': 'Desarrollo skills y herramientas a medida que se conectan entre sí: scraping, informes, control de datos, alarmas y todo lo que puedas imaginar.',
                 'edu_expected': 'Previsto 2026/2027', 'edu_progress': 'Progreso actual',
                 'edu_grad': 'Graduado 2025', 'edu_tsds': 'Bases sólidas en POO (Java, C++), Bases de datos, UML, e Ingeniería del Software.',
                 'certs_title': 'Certificados Oficiales',
@@ -643,8 +703,9 @@
             'en': {
                 'skip_link': 'Skip to main content',
                 'nav_about': 'About', 'nav_experience': 'Experience', 'nav_education': 'Education', 'nav_projects': 'Projects',
-                'mob_about': '01. About', 'mob_experience': '02. Experience', 'mob_education': '03. Education', 'mob_projects': '04. Projects', 'mob_contact': 'Contact Me ↗',
+                'mob_about': '01. About', 'mob_experience': '02. Experience', 'mob_services': '03. Services', 'mob_projects': '04. Projects', 'mob_contact': 'Contact Me ↗',
                 'download_cv': 'View CV .pdf',
+                'nav_services': 'Services',
                 'status': 'Available for Work',
                 'headline': 'Software Developer & Team Lead.',
                 'hero_desc': 'I build fullstack web applications and lead development teams. Bringing <strong class="text-ui-950 dark:text-white font-medium">10+ years of high-pressure leadership experience</strong> to software engineering. Recent graduate connecting technical execution with team coordination.',
@@ -661,6 +722,12 @@
                 'exp_2_li2': 'Union delegate handling stakeholder negotiation, dispute resolution, and team advocacy.',
                 'exp_2_li3': 'Mediated financial conflicts with high-profile clients demonstrating assertive communication.',
                 'edu_title': 'Education & Continuous Learning',
+                'serv_title': 'Services',
+                'serv_subtitle': 'I boost your business with practical AI tools: automation, knowledge bases, intelligent agents, and custom chatbots that actually work.',
+                'serv_1_title': 'AI for your business', 'serv_1_desc': 'I integrate AI models, automated workflows, and data analysis to eliminate repetitive tasks, generate reports, or answer customers without human intervention.',
+                'serv_2_title': 'Vaults & AI Agents', 'serv_2_desc': 'I build knowledge bases connected to your documents and data, plus autonomous agents that respond, execute tasks, and coordinate 24/7 workflows.',
+                'serv_3_title': 'Smart Chatbots', 'serv_3_desc': 'Conversational assistants trained on your own data for sales, support, appointments, or quotes — on web, WhatsApp, or Telegram.',
+                'serv_4_title': 'Skills & Tools / Automation', 'serv_4_desc': 'I build custom skills and tools that connect together: scraping, reports, data monitoring, alerts, and whatever else you need.',
                 'edu_expected': 'Expected 2026/2027', 'edu_progress': 'Progress Tracking',
                 'edu_grad': 'Graduated 2025', 'edu_tsds': 'Comprehensive foundation in OOP (Java, C++), Database Design, UML, and Software Engineering.',
                 'certs_title': 'Certificates & Bootcamps',

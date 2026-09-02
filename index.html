@@ -1,843 +1,598 @@
-
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="Matías Asaro — Fullstack Developer & Team Lead. Técnico Superior en Desarrollo de Software con sólida experiencia en liderazgo y gestión de equipos.">
-    <meta name="keywords" content="fullstack developer, team lead, react, node.js, javascript, developer argentina, portfolio, análisis de sistemas">
-    <meta name="author" content="Matías Asaro">
-    
-    <meta property="og:title" content="Matías Asaro | Fullstack Developer & Team Lead">
-    <meta property="og:description" content="Portfolio profesional — Desarrollo fullstack, liderazgo de equipos y soluciones escalables.">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="es_AR">
-    <title>Matías Asaro | Fullstack Developer & Team Lead</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
-                        mono: ['"JetBrains Mono"', 'monospace'],
-                    },
-                    colors: {
-                        brand: {
-                            50: '#f0fbfb',
-                            100: '#d9f5f5',
-                            200: '#b7ebeb',
-                            300: '#86dddc',
-                            400: '#4ec7c6',
-                            500: '#2fb0b0',
-                            600: '#238e90',
-                            700: '#217274',
-                            800: '#1e5a5c',
-                            900: '#1c4b4d',
-                            950: '#0c2b2d',
-                        },
-                        accent: {
-                            400: '#f07f67',
-                            500: '#e66045',
-                            600: '#d1482b',
-                        },
-                        ui: {
-                            50: '#f8fafc',
-                            100: '#f1f5f9',
-                            200: '#e2e8f0',
-                            300: '#cbd5e1',
-                            400: '#94a3b8',
-                            500: '#64748b',
-                            600: '#475569',
-                            700: '#334155',
-                            800: '#1e293b',
-                            900: '#0f172a',
-                            950: '#020617',
-                        }
-                    }
-                }
-            }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matías Asaro — Portfolio Fullstack Developer & Analista de Sistemas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['"Plus Jakarta Sans"','sans-serif'], mono: ['"JetBrains Mono"','monospace'] },
+          colors: {
+            brand: { 50:'#f0fdfa', 100:'#ccfbf1', 400:'#2dd4bf', 500:'#14b8a6', 600:'#0d9488', 900:'#134e4a' },
+            accent: { 500:'#0284c7', 600:'#0369a1' },
+            dark: { 800:'#1e293b', 850:'#151f30', 900:'#0f172a', 950:'#090d16' }
+          }
         }
-    </script>
-    
-    <style type="text/tailwindcss">
-        :root {
-            --step--1: clamp(0.8333rem, 0.811rem + 0.1118vw, 0.896rem);
-            --step-0: clamp(1rem, 0.9643rem + 0.1786vw, 1.1rem);
-            --step-1: clamp(1.2rem, 1.1449rem + 0.2753vw, 1.3547rem);
-            --step-2: clamp(1.44rem, 1.3582rem + 0.4093vw, 1.6693rem);
-            --step-3: clamp(1.728rem, 1.6094rem + 0.5929vw, 2.06rem);
-            --step-4: clamp(2.0736rem, 1.9051rem + 0.8427vw, 2.5463rem);
-            --step-5: clamp(2.4883rem, 2.2531rem + 1.1762vw, 3.147rem);
-            --step-6: clamp(2.986rem, 2.6625rem + 1.6174vw, 3.8897rem);
-
-            --syntax-keyword: #cc7832;
-            --syntax-string: #6a8759;
-            --syntax-number: #6897bb;
-            --syntax-func: #ffc66d;
-            --syntax-comment: #808080;
-            --syntax-bg: #2b2b2b;
-        }
-
-        body { 
-            font-family: theme('fontFamily.sans');
-            line-height: 1.6;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        /* Improved Skip link for accessibility */
-        .skip-link {
-            position: absolute; top: -40px; left: 0; background: theme('colors.brand.600');
-            color: white; padding: 8px; z-index: 100; transition: top 0.2s ease-out;
-        }
-        .skip-link:focus { top: 0; }
-        
-        *:focus { outline: none; }
-        *:focus-visible { outline: 2px solid theme('colors.accent.500'); outline-offset: 4px; }
-
-        /* Custom UI */
-        .ide-window {
-            background-color: var(--syntax-bg); color: #a9b7c6; font-family: theme('fontFamily.mono');
-            border-radius: 8px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 1px solid #3c3f41;
-        }
-        .ide-header { background-color: #3c3f41; padding: 8px 16px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #242627; }
-        .ide-dot { width: 10px; height: 10px; border-radius: 50%; opacity: 0.8; }
-        .ide-content { padding: 20px; font-size: 0.85rem; line-height: 1.5; }
-        .token-keyword { color: var(--syntax-keyword); }
-        .token-string { color: var(--syntax-string); }
-        .token-number { color: var(--syntax-number); }
-        .token-func { color: var(--syntax-func); }
-        .token-comment { color: var(--syntax-comment); }
-        .cursor-blink { border-right: 2px solid #a9b7c6; animation: blink 1s step-end infinite; }
-        @keyframes blink { 50% { border-color: transparent; } }
-
-        h1, h2, h3, h4, .font-mono { font-family: theme('fontFamily.mono'); }
-        h1 { font-size: var(--step-6); letter-spacing: -0.05em; line-height: 1.1; font-weight: 800; }
-        h2 { font-size: var(--step-4); letter-spacing: -0.03em; font-weight: 700; margin-bottom: 1rem; }
-        h3 { font-size: var(--step-2); font-weight: 700; }
-        .text-body { font-size: var(--step-0); }
-        .label-mono { font-family: theme('fontFamily.mono'); font-size: var(--step--1); letter-spacing: 0.05em; text-transform: uppercase; }
-
-        .btn-primary { background-color: theme('colors.brand.600'); color: theme('colors.white'); padding: 12px 24px; font-weight: 600; transition: opacity 0.2s, transform 0.2s cubic-bezier(0.25, 1, 0.5, 1); display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
-        .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); }
-        .btn-accent { background-color: theme('colors.accent.500'); color: theme('colors.white'); padding: 12px 24px; font-weight: 600; transition: background-color 0.2s, transform 0.2s cubic-bezier(0.25, 1, 0.5, 1); display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
-        .btn-accent:hover { background-color: theme('colors.accent.600'); transform: translateY(-2px); }
-        
-        .nav-link { position: relative; padding: 4px 0; transition: color 0.2s; }
-        .nav-link:hover { color: theme('colors.brand.600'); }
-        .dark .nav-link:hover { color: theme('colors.brand.400'); }
-        .nav-link::after { content: ''; position: absolute; width: 100%; height: 2px; bottom: 0; left: 0; background-color: currentcolor; transform: scaleX(0); transform-origin: bottom right; transition: transform 0.3s; }
-        .nav-link:hover::after { transform: scaleX(1); transform-origin: bottom left; }
-
-        .svg-icon { width: 24px; height: 24px; fill: currentColor; }
-        .touch-target { min-height: 44px; min-width: 44px; display: inline-flex; align-items: center; justify-content: center; }
-        
-        .sticky-cta { position: fixed; bottom: max(16px, env(safe-area-inset-bottom)); left: 16px; right: 16px; z-index: 40; display: none; }
-        @media (max-width: 640px) { .sticky-cta { display: block; } }
-
-        .stagger-item { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-        .stagger-item.visible { opacity: 1; transform: translateY(0); }
-        @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } .stagger-item { transition: opacity 0.2s; transform: none; } .stagger-item:not(.visible) { opacity: 0; transform: none; } }
-
-        .progress-bar-bg { background-color: theme('colors.ui.200'); height: 8px; border-radius: 4px; overflow: hidden; }
-        .dark .progress-bar-bg { background-color: theme('colors.ui.800'); }
-        .progress-bar-fill { height: 100%; background-color: theme('colors.brand.500'); transform-origin: left; transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1); transform: scaleX(0); }
-        .stagger-item.visible .progress-bar-fill { transform: scaleX(0.70); }
-        
-        .proj-img-wrap { position: relative; overflow: hidden; border-radius: 0.75rem; }
-        .proj-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-        .proj-img-wrap:hover img { transform: scale(1.04); }
-        .proj-hover-overlay { position: absolute; inset: 0; background: rgba(14,30,48,0.70); opacity: 0; display: flex; align-items: center; justify-content: center; transition: opacity 0.3s ease; text-decoration: none; }
-        .proj-img-wrap:hover .proj-hover-overlay { opacity: 1; }
-        .proj-hover-label { color: white; font-family: theme('fontFamily.mono'); font-size: 0.875rem; font-weight: 600; letter-spacing: 0.03em; display: flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,0.4); padding: 10px 20px; border-radius: 4px; background: rgba(255,255,255,0.07); }
-
-        /* JS Arrow Carousel */
-        .carousel-viewport { overflow: hidden; width: 100%; border-radius: 0.75rem; }
-        .carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-        .carousel-track img { min-width: 100%; width: 100%; object-fit: cover; object-position: top center; display: block; }
-        .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s; }
-        .carousel-btn:hover { background: rgba(0,0,0,0.8); }
-        .carousel-btn.prev { left: 10px; }
-        .carousel-btn.next { right: 10px; }
-        .carousel-dots { position: absolute; bottom: 8px; left: 0; right: 0; display: flex; justify-content: center; gap: 6px; }
-        .carousel-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.5); transition: background 0.2s; cursor: pointer; }
-        .carousel-dot.active { background: white; }
-    </style>
+      }
+    }
+  </script>
+  <style>
+    ::-webkit-scrollbar { width:8px; height:8px; }
+    ::-webkit-scrollbar-track { background:#0f172a; }
+    ::-webkit-scrollbar-thumb { background:#334155; border-radius:4px; }
+    ::-webkit-scrollbar-thumb:hover { background:#14b8a6; }
+    .glass { background:rgba(30,41,59,0.6); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,0.06); }
+    .glass:hover { border-color:rgba(20,184,166,0.25); }
+    .gradient-text { background:linear-gradient(135deg,#14b8a6 0%,#0ea5e9 50%,#8b5cf6 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .card-hover { transition:all 0.3s ease; }
+    .card-hover:hover { transform:translateY(-4px); box-shadow:0 20px 40px rgba(0,0,0,0.3); }
+    .modal-overlay { background:rgba(0,0,0,0.8); backdrop-filter:blur(8px); }
+    .filter-btn.active { background:linear-gradient(135deg,#14b8a6,#0ea5e9); color:#fff; }
+    @keyframes fadeInUp { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
+    .animate-fade-in { animation:fadeInUp 0.5s ease-out forwards; }
+    .project-card { transition:all 0.3s cubic-bezier(0.4,0,0.2,1); }
+    .project-card:hover .project-overlay { opacity:1; }
+    .project-overlay { opacity:0; transition:opacity 0.3s; }
+    .tech-tag { transition:all 0.2s; }
+    .tech-tag:hover { transform:scale(1.05); }
+    .nav-link { position:relative; }
+    .nav-link::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:2px; background:linear-gradient(90deg,#14b8a6,#0ea5e9); transition:width 0.3s; }
+    .nav-link:hover::after { width:100%; }
+    .stat-card { transition:all 0.3s; }
+    .stat-card:hover { transform:scale(1.05); }
+    .screenshot-carousel { scroll-snap-type:x mandatory; }
+    .screenshot-carousel > * { scroll-snap-align:start; }
+    .screenshot-carousel::-webkit-scrollbar { height:6px; }
+    .screenshot-carousel::-webkit-scrollbar-thumb { background:#14b8a6; border-radius:3px; }
+    code, pre, .font-mono { font-family: 'JetBrains Mono', monospace !important; }
+    .pulse-dot { animation:pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.5;} }
+    .typing-cursor::after { content:'_'; animation:blink 1s infinite; }
+    @keyframes blink { 0%,50%{opacity:1;} 51%,100%{opacity:0;} }
+    @media print {
+      .no-print { display:none !important; }
+      body { background:#fff !important; color:#0f172a !important; }
+      .glass { background:#fff !important; border:1px solid #cbd5e1 !important; }
+    }
+  </style>
 </head>
+<body class="bg-dark-950 text-slate-200 font-sans antialiased selection:bg-brand-500 selection:text-dark-950">
 
-<body class="antialiased bg-ui-50 text-ui-900 dark:bg-ui-950 dark:text-ui-100 selection:bg-brand-200 selection:text-brand-900 dark:selection:bg-brand-800 dark:selection:text-brand-50 min-h-screen">
-    <a href="#main-content" class="skip-link label-mono" data-i18n="skip_link">Saltar al contenido principal</a>
-
-    <nav class="fixed top-0 w-full z-50 bg-ui-50/90 dark:bg-ui-950/90 backdrop-blur-md border-b border-ui-200 dark:border-ui-800 transition-all duration-300" id="navbar">
-        <div class="max-w-6xl mx-auto px-6 h-16 flex justify-between items-center">
-            <div class="flex items-center gap-3 touch-target cursor-pointer" onclick="scrollToSection('perfil')" tabindex="0" role="button">
-                <img src="assets/logo-shark.jpg" alt="Matías Asaro Logo" class="w-8 h-8 rounded shrink-0 object-cover" />
-                <div class="font-mono font-bold text-sm tracking-tight hidden sm:block"><span class="text-brand-600 dark:text-brand-400">~/</span>matias_asaro</div>
-            </div>
-            
-            <div class="flex items-center gap-4">
-                <div class="hidden md:flex gap-6 label-mono font-medium">
-                    <button onclick="scrollToSection('sobre-mi')" class="nav-link touch-target" data-i18n="nav_about">Sobre Mí</button>
-                    <button onclick="scrollToSection('experiencia')" class="nav-link touch-target" data-i18n="nav_experience">Experiencia</button>
-                    <button onclick="scrollToSection('educacion')" class="nav-link touch-target" data-i18n="nav_education">Educación</button>
-                    <button onclick="scrollToSection('servicios')" class="nav-link touch-target" data-i18n="nav_services">Servicios</button>
-                    <button onclick="scrollToSection('proyectos')" class="nav-link touch-target" data-i18n="nav_projects">Proyectos</button>
-                </div>
-                
-                <div class="h-6 w-px bg-ui-300 dark:bg-ui-700 mx-2 hidden sm:block"></div>
-                
-                <button onclick="toggleLang()" class="font-mono text-sm touch-target font-bold text-ui-600 dark:text-ui-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors" id="lang-toggle">
-                    EN
-                </button>
-
-                <button onclick="toggleTheme()" class="touch-target rounded-md hover:bg-ui-200 dark:hover:bg-ui-800 transition-colors text-ui-600 dark:text-ui-400" aria-label="Toggle Dark Mode" id="theme-toggle">
-                    <svg class="svg-icon dark:hidden" viewBox="0 0 24 24"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0z"/></svg>
-                    <svg class="svg-icon hidden dark:block" viewBox="0 0 24 24"><path d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z"/></svg>
-                </button>
-                
-                <button onclick="toggleMobileMenu()" class="md:hidden touch-target text-ui-600 dark:text-ui-400" aria-label="Open Menu" aria-expanded="false" id="menu-toggle">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-                </button>
-            </div>
+  <!-- HEADER -->
+  <header class="sticky top-0 z-50 glass border-b border-slate-800/60 no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <img src="assets/logo-shark.jpg" alt="Logo" class="w-10 h-10 rounded-xl object-cover border border-brand-500/30" onerror="if(!this.dataset.tried){this.dataset.tried=1;this.src='../assets/logo-shark.jpg';}">
+        <div>
+          <h1 class="font-bold text-slate-100 text-base leading-tight">Matías Asaro</h1>
+          <p class="text-xs text-brand-400 font-mono">Fullstack Dev · Analista · Tech Lead</p>
         </div>
-    </nav>
+      </div>
+      <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
+        <a href="#inicio" class="nav-link text-slate-300 hover:text-brand-400">Inicio</a>
+        <a href="#proyectos" class="nav-link text-slate-300 hover:text-brand-400">Proyectos</a>
+        <a href="#ia-agentes" class="nav-link text-slate-300 hover:text-brand-400">IA & Agentes</a>
+        <a href="#experiencia" class="nav-link text-slate-300 hover:text-brand-400">Experiencia</a>
+        <a href="#formacion" class="nav-link text-slate-300 hover:text-brand-400">Formación</a>
+        <a href="#contacto" class="nav-link text-slate-300 hover:text-brand-400">Contacto</a>
+      </nav>
+      <div class="flex items-center space-x-3">
+        <a href="mailto:maty_asaro@protonmail.com" class="flex items-center space-x-2 bg-gradient-to-r from-brand-500 to-accent-500 hover:from-brand-400 hover:to-accent-400 text-dark-950 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider shadow-lg shadow-brand-500/25 transition-all">
+          <i class="fa-solid fa-envelope text-sm"></i>
+          <span class="hidden sm:inline">Contactar</span>
+        </a>
+      </div>
+    </div>
+  </header>
 
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 z-40 bg-ui-50 dark:bg-ui-950 hidden flex-col justify-center px-8 transition-colors" inert>
-        <div class="flex flex-col gap-8 text-2xl font-mono font-bold text-ui-900 dark:text-ui-100">
-            <button onclick="scrollToSection('sobre-mi'); toggleMobileMenu()" class="text-left py-2 hover:text-brand-600 focus-visible:text-brand-600" data-i18n="mob_about">01. Sobre Mí</button>
-            <button onclick="scrollToSection('experiencia'); toggleMobileMenu()" class="text-left py-2 hover:text-brand-600 focus-visible:text-brand-600" data-i18n="mob_experience">02. Experiencia</button>
-            <button onclick="scrollToSection('educacion'); toggleMobileMenu()" class="text-left py-2 hover:text-brand-600 focus-visible:text-brand-600" data-i18n="mob_education">03. Educación</button>
-            <button onclick="scrollToSection('servicios'); toggleMobileMenu()" class="text-left py-2 hover:text-brand-600 focus-visible:text-brand-600" data-i18n="mob_services">03. Servicios</button>
-            <button onclick="scrollToSection('proyectos'); toggleMobileMenu()" class="text-left py-2 hover:text-brand-600 focus-visible:text-brand-600" data-i18n="mob_projects">04. Proyectos</button>
-            <a href="mailto:maty_asaro@protonmail.com" class="text-left py-2 text-accent-500 mt-4" data-i18n="mob_contact">Contactame ↗</a>
+  <!-- HERO -->
+  <section id="inicio" class="relative overflow-hidden pt-16 pb-20 border-b border-slate-800">
+    <div class="absolute -top-40 -right-40 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-mono">
+            <i class="fa-solid fa-code-branch"></i>
+            <span>Disponible para Proyectos · Tech Lead</span>
+          </div>
+          <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
+            Desarrollo Fullstack escalable y <span class="gradient-text">Análisis de Sistemas</span> orientado a resultados.
+          </h2>
+          <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-3xl">
+            Técnico Superior en Desarrollo de Software (ISFT N°204) y Analista de Sistemas en formación (~90% ISET). Fusiono más de 10 años liderando equipos en entornos de alta presión con arquitectura en <strong class="text-white">Node.js, TypeScript, React 19, Next.js 16, MySQL, Firebase y Agentes de IA autónomos</strong>.
+          </p>
+          <div class="flex flex-wrap gap-4 pt-2">
+            <a href="#proyectos" class="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-sm border border-slate-700 flex items-center gap-2 transition-all">
+              <i class="fa-solid fa-server text-brand-400"></i>
+              Ver Proyectos
+            </a>
+            <a href="#ia-agentes" class="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-sm border border-slate-700 flex items-center gap-2 transition-all">
+              <i class="fa-solid fa-robot text-emerald-400"></i>
+              Ecosistema IA
+            </a>
+            <a href="assets/certificados/CV_Matias_Asaro.pdf" target="_blank" class="px-5 py-3 rounded-xl bg-brand-500 hover:bg-brand-400 text-dark-950 font-bold text-sm flex items-center gap-2 shadow-lg shadow-brand-500/20 transition-all">
+              <i class="fa-solid fa-file-pdf"></i>
+              Descargar CV
+            </a>
+          </div>
+          <div class="pt-4 flex flex-wrap items-center gap-6 text-xs text-slate-400 font-mono">
+            <span class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-brand-400"></i> Mar del Plata, Argentina</span>
+            <a href="https://linkedin.com/in/matias-asaro-910305272" target="_blank" class="flex items-center gap-1.5 hover:text-brand-300"><i class="fa-brands fa-linkedin text-sky-400"></i> LinkedIn</a>
+            <a href="https://github.com/Matiburon87" target="_blank" class="flex items-center gap-1.5 hover:text-brand-300"><i class="fa-brands fa-github text-slate-100"></i> GitHub</a>
+          </div>
         </div>
+        <div class="lg:col-span-5 space-y-4">
+          <!-- IDE WINDOW -->
+          <div class="rounded-2xl overflow-hidden border border-[#3c3f41] shadow-2xl bg-[#2b2b2b] font-mono text-xs leading-relaxed text-[#a9b7c6] card-hover">
+            <div class="bg-[#3c3f41] px-4 py-2 flex items-center justify-between border-b border-[#242627]">
+              <div class="flex items-center space-x-2">
+                <span class="w-3 h-3 rounded-full bg-[#ff5f56]"></span>
+                <span class="w-3 h-3 rounded-full bg-[#ffbd2e]"></span>
+                <span class="w-3 h-3 rounded-full bg-[#27c93f]"></span>
+              </div>
+              <span class="text-xs text-[#808080] font-mono flex items-center gap-1.5"><i class="fa-solid fa-code text-[10px] text-[#cc7832]"></i> Developer.js</span>
+              <div class="w-10"></div>
+            </div>
+            <div class="p-5 overflow-x-auto selection:bg-[#214283] space-y-0.5">
+              <p><span class="text-[#cc7832]">import</span> { <span class="text-[#a9b7c6]">Developer</span>, <span class="text-[#a9b7c6]">Leader</span> } <span class="text-[#cc7832]">from</span> <span class="text-[#6a8759]">'@matias/core'</span>;</p>
+              <div class="h-2"></div>
+              <p><span class="text-[#cc7832]">class</span> <span class="text-[#ffc66d]">MatiasAsaro</span> <span class="text-[#cc7832]">extends</span> <span class="text-[#ffc66d]">Developer</span> {</p>
+              <p>&nbsp;&nbsp;<span class="text-[#ffc66d]">constructor</span>() {</p>
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-[#cc7832]">super</span>();</p>
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-[#a9b7c6]">this</span>.<span class="text-[#9876aa]">role</span> = <span class="text-[#6a8759]">'Fullstack Dev'</span>;</p>
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-[#a9b7c6]">this</span>.<span class="text-[#9876aa]">base</span> = <span class="text-[#6a8759]">'Mar del Plata, ARG'</span>;</p>
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-[#a9b7c6]">this</span>.<span class="text-[#9876aa]">englishLevel</span> = { <span class="text-[#9876aa]">reading</span>: <span class="text-[#6a8759]">'C1'</span>, <span class="text-[#9876aa]">speaking</span>: <span class="text-[#6a8759]">'B2'</span> };</p>
+              <p>&nbsp;&nbsp;}</p>
+              <div class="h-2"></div>
+              <p>&nbsp;&nbsp;<span class="text-[#ffc66d]">getLeadershipExperience</span>() {</p>
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-[#cc7832]">return</span> { <span class="text-[#9876aa]">years</span>: <span class="text-[#6897bb]">10</span>, <span class="text-[#9876aa]">teamSize</span>: <span class="text-[#6897bb]">20</span>, <span class="text-[#9876aa]">highPressureEnv</span>: <span class="text-[#cc7832]">true</span> };</p>
+              <p>&nbsp;&nbsp;}</p>
+              <p>}<span class="inline-block w-2 h-4 ml-0.5 bg-[#a9b7c6] animate-pulse align-middle"></span></p>
+            </div>
+          </div>
+          <!-- STAT CARDS -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 gap-3">
+            <div class="glass p-4 rounded-xl text-center stat-card">
+              <p class="text-2xl font-extrabold text-brand-400 font-mono">+10</p>
+              <p class="text-[10px] text-slate-400 mt-0.5 uppercase font-semibold">Años Liderando</p>
+            </div>
+            <div class="glass p-4 rounded-xl text-center stat-card">
+              <p class="text-2xl font-extrabold text-sky-400 font-mono">6</p>
+              <p class="text-[10px] text-slate-400 mt-0.5 uppercase font-semibold">Proyectos Activos</p>
+            </div>
+            <div class="glass p-4 rounded-xl text-center stat-card">
+              <p class="text-2xl font-extrabold text-emerald-400 font-mono">278</p>
+              <p class="text-[10px] text-slate-400 mt-0.5 uppercase font-semibold">Sesiones IA</p>
+            </div>
+            <div class="glass p-4 rounded-xl text-center stat-card">
+              <p class="text-2xl font-extrabold text-amber-400 font-mono">$273M</p>
+              <p class="text-[10px] text-slate-400 mt-0.5 uppercase font-semibold">ROI Proyectado</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <!-- Sticky CTA Mobile -->
-    <div class="sticky-cta">
-        <a href="assets/CV_Matias_Asaro.pdf" target="_blank" class="btn-primary block text-center rounded-lg shadow-lg w-full" data-i18n="download_cv">Ver CV .pdf</a>
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- IA & AGENTES -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <section id="ia-agentes" class="py-16 bg-dark-900/60 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 font-mono text-xs uppercase mb-3">
+          <i class="fa-solid fa-brain"></i> Ecosistema IA & Automatización
+        </div>
+        <h2 class="text-3xl font-extrabold text-white">Agentes IA, Obsidian & IA Local</h2>
+        <p class="text-slate-400 mt-3">No solo uso IA como asistente — desarrollo sistemas autónomos en producción con costo de infraestructura $0.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
+        <!-- Hermes Agent -->
+        <div class="glass p-6 rounded-2xl card-hover">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+              <i class="fa-solid fa-robot text-emerald-400 text-xl"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-white">Hermes Agent</h3>
+              <p class="text-xs text-emerald-400 font-mono">278 sesiones · $0 costo</p>
+            </div>
+          </div>
+          <p class="text-sm text-slate-300 mb-4">Sistema de agentes IA autónomo que ejecuta pipelines completos: escaneo de portales, evaluación semántica de ofertas, generación de reportes y Daily Triage Loop.</p>
+          <div class="space-y-2 text-xs">
+            <div class="flex items-center gap-2 text-slate-400"><i class="fa-solid fa-check text-emerald-400"></i><span>Scanner multi-portal (Playwright + Gemini)</span></div>
+            <div class="flex items-center gap-2 text-slate-400"><i class="fa-solid fa-check text-emerald-400"></i><span>Evaluador semántico de ofertas (Score A-G)</span></div>
+            <div class="flex items-center gap-2 text-slate-400"><i class="fa-solid fa-check text-emerald-400"></i><span>Pipeline automático: URL → JD → Eval → PDF</span></div>
+            <div class="flex items-center gap-2 text-slate-400"><i class="fa-solid fa-check text-emerald-400"></i><span>Dashboard Express.js en localhost:3737</span></div>
+            <div class="flex items-center gap-2 text-slate-400"><i class="fa-solid fa-check text-emerald-400"></i><span>Daily Triage Loop — Reporte L1 automático</span></div>
+          </div>
+        </div>
+
+        <!-- Obsidian Vault -->
+        <div class="glass p-6 rounded-2xl card-hover">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center">
+              <i class="fa-solid fa-book-open text-purple-400 text-xl"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-white">Obsidian Vaults</h3>
+              <p class="text-xs text-purple-400 font-mono">Second Brain · 2 vaults activos</p>
+            </div>
+          </div>
+          <p class="text-sm text-slate-300 mb-4">Sistema de conocimiento organizado en vaults paralelos por dominio. Datos SAGrados (reales y verificados) con auditoría de decisiones.</p>
+          <div class="space-y-2 text-xs">
+            <div class="flex items-center gap-2 text-slate-400"><i class="fa-solid fa-check text-purple-400"></i><span>vault-aldosivi: Campaña sindical + comunicación</span></div>
+            <div class="flex items-center gap-2 text-slate-400"><i class="fa-solid fa-check text-purple-400"></i><span>vault-sindical: Formación + estrategia gremial</span></div>
+            <div class="flex items-center gap-2 text-slate-400"><i class="fa-solid fa-check text-purple-400"></i><span>decisions.md: Audit log de decisiones de datos</span></div>
+            <div class="flex items-center gap-2 text-slate-400"><i class="fa-solid fa-check text-purple-400"></i><span>INDEX.md: Mapa de navegación para agentes</span></div>
+            <div class="flex items-center gap-2 text-slate-400"><i class="fa-solid fa-check text-purple-400"></i><span>Principio: un tema = un archivo</span></div>
+          </div>
+        </div>
+
+        <!-- IA Local -->
+        <div class="glass p-6 rounded-2xl card-hover">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
+              <i class="fa-solid fa-microchip text-amber-400 text-xl"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-white">IA Local (LM Studio)</h3>
+              <p class="text-xs text-amber-400 font-mono">RTX 3080 · GGUF · API local</p>
+            </div>
+          </div>
+          <p class="text-sm text-slate-300 mb-4">Configuración de modelos locales para distintos casos de uso: razonamiento complejo, asistencia de código y procesamiento batch.</p>
+          <div class="space-y-2 text-xs">
+            <div class="flex items-center gap-2 text-slate-400"><i class="fa-solid fa-check text-amber-400"></i><span>qwythos-9b-claude-mythos-5-1m (razonamiento)</span></div>
+            <div class="flex items-center gap-2 text-slate-400"><i class="fa-solid fa-check text-amber-400"></i><span>Gemma 4 E4B Q4_K_M (alternativa rápida)</span></div>
+            <div class="flex items-center gap-2 text-slate-400"><i class="fa-solid fa-check text-amber-400"></i><span>API local: 127.0.0.1:1234/v1</span></div>
+            <div class="flex items-center gap-2 text-slate-400"><i class="fa-solid fa-check text-amber-400"></i><span>Ahorro de gateway tokens (costo $0)</span></div>
+            <div class="flex items-center gap-2 text-slate-400"><i class="fa-solid fa-check text-amber-400"></i><span>Timeout >= 300s para razonamiento profundo</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pipeline Visual -->
+      <div class="glass p-6 rounded-2xl">
+        <h3 class="font-bold text-white mb-4 flex items-center gap-2"><i class="fa-solid fa-diagram-project text-brand-400"></i> Pipeline de Automatización (career-ops)</h3>
+        <div class="flex flex-wrap items-center justify-center gap-3 text-xs font-mono">
+          <div class="px-3 py-2 rounded-lg bg-sky-500/10 border border-sky-500/20 text-sky-400">Pipeline.md</div>
+          <i class="fa-solid fa-arrow-right text-slate-600"></i>
+          <div class="px-3 py-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">scan.mjs</div>
+          <i class="fa-solid fa-arrow-right text-slate-600"></i>
+          <div class="px-3 py-2 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400">Playwright Crawler</div>
+          <i class="fa-solid fa-arrow-right text-slate-600"></i>
+          <div class="px-3 py-2 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400">gemini-eval.mjs</div>
+          <i class="fa-solid fa-arrow-right text-slate-600"></i>
+          <div class="px-3 py-2 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-400">Reporte PDF</div>
+          <i class="fa-solid fa-arrow-right text-slate-600"></i>
+          <div class="px-3 py-2 rounded-lg bg-teal-500/10 border border-teal-500/20 text-teal-400">Dashboard :3737</div>
+        </div>
+        <p class="text-xs text-slate-400 mt-4 text-center">Flujo completo: URL de oferta → extracción de JD → evaluación semántica con Gemini → Score A-G → reporte → tracker web</p>
+      </div>
     </div>
+  </section>
 
-    <main id="main-content" class="max-w-6xl mx-auto px-6 pt-32 pb-24 space-y-32">
-        <!-- HERO -->
-        <section id="sobre-mi" class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center min-h-[70vh]">
-            <div class="lg:col-span-7 space-y-8 stagger-container">
-                <div class="stagger-item">
-                    <span class="label-mono flex items-center gap-2 text-brand-600 dark:text-brand-400">
-                        <span class="relative flex h-3 w-3">
-                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
-                          <span class="relative inline-flex rounded-full h-3 w-3 bg-brand-500"></span>
-                        </span>
-                        <span data-i18n="status">Disponible para trabajar</span>
-                    </span>
-                </div>
-                
-                <div class="stagger-item space-y-4">
-                    <h1>Matías Asaro.</h1>
-                    <h2 class="text-ui-700 dark:text-ui-300 font-sans font-medium" data-i18n="headline">Desarrollador Fullstack & Team Lead.</h2>
-                </div>
-                
-                <p class="text-body text-ui-800 dark:text-ui-200 max-w-2xl stagger-item" data-i18n="hero_desc">
-                    Construyo aplicaciones web fullstack y lidero equipos de desarrollo. Aporto <strong class="text-ui-950 dark:text-white font-medium">+10 años de experiencia liderando equipos en entornos de alta presión</strong>, ahora quiero dedicarlo a la ingeniería de software. Graduado reciente que conecta ejecución técnica con coordinación estratégica.
-                </p>
-                
-                <div class="flex flex-wrap gap-4 pt-4 stagger-item items-center">
-                    <a href="mailto:maty_asaro@protonmail.com" class="btn-accent rounded-md" data-i18n="btn_contact">Contactame</a>
-                    <a href="assets/CV_Matias_Asaro.pdf" target="_blank" class="btn-primary rounded-md hidden sm:inline-flex" data-i18n="btn_cv">Ver CV</a>
-                    <div class="flex items-center gap-2 ms-auto sm:ms-2 text-ui-600 dark:text-ui-400">
-                        <a href="https://github.com/Matiburon87" target="_blank" rel="noopener" class="touch-target hover:text-brand-600 dark:hover:text-brand-400 transition" aria-label="GitHub Profile">
-                            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-                        </a>
-                        <a href="https://www.linkedin.com/in/matias-asaro-910305272" target="_blank" rel="noopener" class="touch-target hover:text-brand-600 dark:hover:text-brand-400 transition" aria-label="LinkedIn Profile">
-                            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                        </a>
-                    </div>
-                </div>
+  <!-- FILTROS PROYECTOS -->
+  <section id="proyectos" class="py-16 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <div>
+          <div class="flex items-center gap-2 text-brand-400 text-xs font-mono uppercase tracking-wider mb-2"><i class="fa-solid fa-globe"></i><span>Proyectos en Producción</span></div>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-white">Portfolio Interactivo</h2>
+          <p class="text-slate-400 text-sm mt-2">Filtra por categoría o tecnología. Click para ver detalles, screenshots y análisis.</p>
+        </div>
+        <div class="flex flex-wrap gap-2" id="filterContainer">
+          <button class="filter-btn active px-4 py-2 rounded-lg text-xs font-semibold transition-all" data-filter="todos">Todos</button>
+          <button class="filter-btn px-4 py-2 rounded-lg bg-slate-800 text-slate-300 text-xs font-semibold transition-all" data-filter="ecommerce">E-Commerce</button>
+          <button class="filter-btn px-4 py-2 rounded-lg bg-slate-800 text-slate-300 text-xs font-semibold transition-all" data-filter="dashboard">Dashboard</button>
+          <button class="filter-btn px-4 py-2 rounded-lg bg-slate-800 text-slate-300 text-xs font-semibold transition-all" data-filter="media">Media</button>
+          <button class="filter-btn px-4 py-2 rounded-lg bg-slate-800 text-slate-300 text-xs font-semibold transition-all" data-filter="landing">Landing</button>
+          <button class="filter-btn px-4 py-2 rounded-lg bg-slate-800 text-slate-300 text-xs font-semibold transition-all" data-filter="app">App</button>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-2 mb-8" id="techFilterContainer">
+        <span class="text-xs text-slate-500 font-mono mr-2">Tech:</span>
+        <button class="tech-tag px-3 py-1 rounded-full bg-slate-800 text-slate-400 text-[10px] font-mono hover:bg-brand-500/20 hover:text-brand-400 transition-all" data-tech="react">React</button>
+        <button class="tech-tag px-3 py-1 rounded-full bg-slate-800 text-slate-400 text-[10px] font-mono hover:bg-brand-500/20 hover:text-brand-400 transition-all" data-tech="nextjs">Next.js</button>
+        <button class="tech-tag px-3 py-1 rounded-full bg-slate-800 text-slate-400 text-[10px] font-mono hover:bg-brand-500/20 hover:text-brand-400 transition-all" data-tech="nodejs">Node.js</button>
+        <button class="tech-tag px-3 py-1 rounded-full bg-slate-800 text-slate-400 text-[10px] font-mono hover:bg-brand-500/20 hover:text-brand-400 transition-all" data-tech="firebase">Firebase</button>
+        <button class="tech-tag px-3 py-1 rounded-full bg-slate-800 text-slate-400 text-[10px] font-mono hover:bg-brand-500/20 hover:text-brand-400 transition-all" data-tech="mysql">MySQL</button>
+        <button class="tech-tag px-3 py-1 rounded-full bg-slate-800 text-slate-400 text-[10px] font-mono hover:bg-brand-500/20 hover:text-brand-400 transition-all" data-tech="typescript">TypeScript</button>
+        <button class="tech-tag px-3 py-1 rounded-full bg-slate-800 text-slate-400 text-[10px] font-mono hover:bg-brand-500/20 hover:text-brand-400 transition-all" data-tech="tailwind">Tailwind</button>
+        <button class="tech-tag px-3 py-1 rounded-full bg-slate-800 text-slate-400 text-[10px] font-mono hover:bg-brand-500/20 hover:text-brand-400 transition-all" data-tech="prisma">Prisma</button>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="projectsGrid"></div>
+    </div>
+  </section>
+
+  <!-- MODAL -->
+  <div id="projectModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-overlay no-print">
+    <div class="glass rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-slate-700">
+      <div class="sticky top-0 z-10 flex items-center justify-between p-4 border-b border-slate-700 bg-dark-900/90 backdrop-blur">
+        <h3 id="modalTitle" class="text-xl font-bold text-white"></h3>
+        <button onclick="closeModal()" class="w-10 h-10 rounded-lg bg-slate-800 hover:bg-slate-700 flex items-center justify-center transition-all"><i class="fa-solid fa-times text-slate-400"></i></button>
+      </div>
+      <div id="modalContent" class="p-6"></div>
+    </div>
+  </div>
+
+  <!-- EXPERIENCIA -->
+  <section id="experiencia" class="py-16 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 text-brand-400 font-mono text-xs uppercase mb-3"><i class="fa-solid fa-briefcase"></i> Experiencia</div>
+        <h2 class="text-3xl font-extrabold text-white">Trayectoria Profesional</h2>
+      </div>
+      <div class="space-y-6 max-w-4xl mx-auto">
+        <div class="glass p-6 rounded-2xl card-hover">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <span class="px-2.5 py-1 rounded-md bg-brand-500/10 text-brand-400 font-mono text-xs border border-brand-500/20">2024 — Presente</span>
+              <h3 class="text-xl font-bold text-white mt-2">Fullstack Developer & Team Lead</h3>
+              <p class="text-sm text-slate-400">Freelance / Proyectos Propios</p>
             </div>
-            
-            <div class="lg:col-span-5 stagger-item hidden md:block">
-                <div class="ide-window">
-                    <div class="ide-header">
-                        <div class="ide-dot bg-[#ff5f56]"></div>
-                        <div class="ide-dot bg-[#ffbd2e]"></div>
-                        <div class="ide-dot bg-[#27c93f]"></div>
-                        <span class="text-xs text-[#808080] ml-2">Developer.js</span>
-                    </div>
-                    <div class="ide-content">
-                        <p><span class="token-keyword">import</span> { Developer, Leader } <span class="token-keyword">from</span> <span class="token-string">'@matias/core'</span>;</p>
-                        <br>
-                        <p><span class="token-keyword">class</span> <span class="token-func">MatiasAsaro</span> <span class="token-keyword">extends</span> <span class="token-func">Developer</span> {</p>
-                        <p>&nbsp;&nbsp;<span class="token-keyword">constructor</span>() {</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token-keyword">super</span>();</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token-keyword">this</span>.role = <span class="token-string">'Fullstack Dev'</span>;</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token-keyword">this</span>.base = <span class="token-string">'Mar del Plata, ARG'</span>;</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token-keyword">this</span>.englishLevel = {</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reading: <span class="token-string">'C1'</span>,</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;speaking: <span class="token-string">'B2'</span></p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;};</p>
-                        <p>&nbsp;&nbsp;}</p>
-                        <br>
-                        <p>&nbsp;&nbsp;<span class="token-func">getLeadershipExperience</span>() {</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="token-keyword">return</span> {</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;years: <span class="token-number">10</span>,</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;teamSize: <span class="token-number">20</span>,</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;highPressureEnv: <span class="token-keyword">true</span></p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;};</p>
-                        <p>&nbsp;&nbsp;}</p>
-                        <p>}<span class="cursor-blink"></span></p>
-                    </div>
-                </div>
+            <i class="fa-solid fa-code text-brand-400 text-2xl"></i>
+          </div>
+          <ul class="space-y-2 text-sm text-slate-300">
+            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-400 mt-0.5 text-xs"></i><span>Arquitectura de E-commerce, dashboards deportivos, portales de medios y campañas sindicales.</span></li>
+            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-400 mt-0.5 text-xs"></i><span>Automatización con n8n e integraciones de flujos IA (Gemini, Claude, Playwright).</span></li>
+            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-400 mt-0.5 text-xs"></i><span>Liderazgo técnico en equipos multidisciplinarios (UX/Frontend/Backend).</span></li>
+          </ul>
+        </div>
+        <div class="glass p-6 rounded-2xl card-hover">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <span class="px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-400 font-mono text-xs border border-emerald-500/20">2014 — Presente</span>
+              <h3 class="text-xl font-bold text-white mt-2">Croupier & Coordinador de Mesa</h3>
+              <p class="text-sm text-slate-400">Casino Central — Mar del Plata</p>
             </div>
-        </section>
+            <i class="fa-solid fa-dice-d6 text-emerald-400 text-2xl"></i>
+          </div>
+          <ul class="space-y-2 text-sm text-slate-300">
+            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-400 mt-0.5 text-xs"></i><span>Coordinación de equipos de +20 personas y toma de decisiones financieras en tiempo real.</span></li>
+            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-400 mt-0.5 text-xs"></i><span>Delegado sindical: negociación, resolución de disputas, comunicación asertiva con VIPs.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- EXPERIENCE -->
-        <section id="experiencia" class="stagger-container">
-            <h2 class="stagger-item"><span class="text-brand-600 dark:text-brand-400">01.</span> <span data-i18n="exp_title">Experiencia Profesional</span></h2>
-            
-            <div class="mt-12 space-y-16">
-                <!-- IT Freelance -->
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8 stagger-item">
-                    <div class="md:col-span-1">
-                        <p class="font-mono text-sm text-ui-600 dark:text-ui-400" data-i18n="exp_date_1">2024 — Presente</p>
-                    </div>
-                    <div class="md:col-span-3 space-y-4">
-                        <div class="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4">
-                            <h3 data-i18n="exp_role_1">Desarrollador Fullstack & Team Lead</h3>
-                            <span class="label-mono text-brand-600 dark:text-brand-400">Freelance</span>
-                        </div>
-                        <ul class="list-none space-y-3 text-ui-800 dark:text-ui-200 pl-0">
-                            <li class="relative pl-6 before:content-['▹'] before:absolute before:left-0 before:text-brand-600 dark:before:text-brand-400" data-i18n="exp_1_li1">Arquitectura y desarrollo plataforma E-commerce (Stock, Pagos QR, Panel admin).</li>
-                            <li class="relative pl-6 before:content-['▹'] before:absolute before:left-0 before:text-brand-600 dark:before:text-brand-400" data-i18n="exp_1_li2">Creación de landing pages orientadas a negocios, enfocadas en conversión y performance.</li>
-                            <li class="relative pl-6 before:content-['▹'] before:absolute before:left-0 before:text-brand-600 dark:before:text-brand-400" data-i18n="exp_1_li3">Automatización de procesos (n8n) e integraciones de flujos IA.</li>
-                            <li class="relative pl-6 before:content-['▹'] before:absolute before:left-0 before:text-brand-600 dark:before:text-brand-400" data-i18n="exp_1_li4">Liderazgo técnico en proyectos colaborativos.</li>
-                        </ul>
-                        <div class="flex flex-wrap gap-2 pt-2 text-ui-700 dark:text-ui-300">
-                            <span class="px-3 py-1 bg-ui-200 dark:bg-ui-800 text-xs font-mono rounded">React</span>
-                            <span class="px-3 py-1 bg-ui-200 dark:bg-ui-800 text-xs font-mono rounded">Node.js</span>
-                            <span class="px-3 py-1 bg-ui-200 dark:bg-ui-800 text-xs font-mono rounded">MySQL</span>
-                            <span class="px-3 py-1 bg-ui-200 dark:bg-ui-800 text-xs font-mono rounded">Tailwind</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Casino -->
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8 stagger-item">
-                    <div class="md:col-span-1">
-                        <p class="font-mono text-sm text-ui-600 dark:text-ui-400" data-i18n="exp_date_2">2014 — Presente (Noche)</p>
-                    </div>
-                    <div class="md:col-span-3 space-y-4">
-                        <div class="flex flex-col gap-1">
-                            <h3 data-i18n="exp_role_2">Croupier </h3>
-                            <span class="label-mono text-brand-600 dark:text-brand-400">Casino Central — Mar del Plata</span>
-                        </div>
-                        <div class="p-4 bg-ui-200/50 dark:bg-ui-800/50 rounded-lg border border-ui-200 dark:border-ui-700 my-4 text-ui-900 dark:text-ui-50">
-                            <p class="text-sm font-medium"><strong class="text-brand-600 dark:text-brand-400" data-i18n="exp_2_note_title">Liderazgo bajo presión:</strong> <span data-i18n="exp_2_note_desc">Coordinación de equipos (+20 personas) y toma de decisiones financieras en tiempo real.</span></p>
-                        </div>
-                        <ul class="list-none space-y-3 text-ui-800 dark:text-ui-200 pl-0">
-                            <li class="relative pl-6 before:content-['▹'] before:absolute before:left-0 before:text-brand-600 dark:before:text-brand-400" data-i18n="exp_2_li1">Operador de mesa de BlackJack y Craps; requiere cálculo mental y ejecución en tiempo real.</li>
-                            <li class="relative pl-6 before:content-['▹'] before:absolute before:left-0 before:text-brand-600 dark:before:text-brand-400" data-i18n="exp_2_li2">Delegado sindical: negociación de intereses de las partes, resolución de disputas.</li>
-                            <li class="relative pl-6 before:content-['▹'] before:absolute before:left-0 before:text-brand-600 dark:before:text-brand-400" data-i18n="exp_2_li3">Mediación de conflictos con clientes VIP demostrando gran comunicación asertiva.</li>
-                        </ul>
-                    </div>
-                </div>
+  <!-- FORMACION -->
+  <section id="formacion" class="py-16 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 text-brand-400 font-mono text-xs uppercase mb-3"><i class="fa-solid fa-graduation-cap"></i> Formación</div>
+        <h2 class="text-3xl font-extrabold text-white">Educación y Certificaciones</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div class="space-y-4">
+          <h3 class="text-lg font-bold text-white flex items-center gap-2"><i class="fa-solid fa-school text-brand-400"></i> Títulos Académicos</h3>
+          <div class="glass p-5 rounded-xl card-hover">
+            <div class="flex justify-between items-start mb-2">
+              <h4 class="font-bold text-white text-sm">Tec. Superior en Análisis de Sistemas</h4>
+              <span class="px-2 py-0.5 rounded bg-sky-500/10 text-sky-400 font-mono text-[10px]">~90% ISET</span>
             </div>
-        </section>
-
-        <!-- EDUCATION -->
-        <section id="educacion" class="stagger-container">
-            <h2 class="stagger-item"><span class="text-brand-600 dark:text-brand-400">02.</span> <span data-i18n="edu_title">Formación & Cursos Completados</span></h2>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-12">
-                <!-- Formal Education -->
-                <div class="space-y-8">
-                    <div class="stagger-item space-y-3 border-l-2 border-brand-500 pl-6">
-                        <span class="label-mono text-xs bg-ui-200 dark:bg-ui-800 px-2 py-1 rounded inline-block text-ui-900 dark:text-ui-50" data-i18n="edu_expected">Previsto 2026/2027</span>
-                        <h3 class="text-xl">Tecnicatura Superior en Análisis de Sistemas</h3>
-                        <p class="font-mono text-sm text-brand-600 dark:text-brand-400">ISET, Mar del Plata</p>
-                        
-                        <div class="pt-2">
-                            <div class="flex justify-between text-xs font-mono mb-1 text-ui-600 dark:text-ui-400">
-                                <span data-i18n="edu_progress">Progreso actual</span>
-                                <span>~70%</span>
-                            </div>
-                            <div class="progress-bar-bg">
-                                <div class="progress-bar-fill"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="stagger-item space-y-2 border-l-2 border-ui-300 dark:border-ui-700 pl-6 hover:border-brand-400 transition-colors">
-                        <span class="label-mono text-xs bg-ui-200 dark:bg-ui-800 px-2 py-1 rounded inline-block text-ui-900 dark:text-ui-50" data-i18n="edu_grad">Graduado 2025</span>
-                        <h3 class="text-xl">Técnico Superior en Desarrollo de Software</h3>
-                        <p class="font-mono text-sm text-brand-600 dark:text-brand-400">ISFT N°204, Mar del Plata</p>
-                        <p class="text-sm text-ui-800 dark:text-ui-200 pt-2" data-i18n="edu_tsds">Bases sólidas en POO (Java, C++), Bases de datos, UML, e Ingeniería del Software.</p>
-                    </div>
-                </div>
-
-                <!-- Certifications -->
-                <div class="space-y-6">
-                    <h3 class="text-lg font-mono font-medium border-b border-ui-200 dark:border-ui-700 pb-2 stagger-item text-ui-900 dark:text-ui-50" data-i18n="certs_title">Certificados Oficiales</h3>
-                    
-                    <!-- Cert BIG -->
-                    <a href="assets/Matias Alberto _maty_asaro@protonmail.com.pdf" target="_blank" class="stagger-item flex flex-col gap-1 p-4 bg-white dark:bg-ui-900/50 rounded-lg shadow-sm border border-ui-200 dark:border-ui-800 hover:border-brand-500 transition-colors group">
-                        <div class="flex justify-between items-start">
-                            <h4 class="font-bold text-base m-0 text-ui-900 dark:text-ui-50 group-hover:text-brand-600 dark:group-hover:text-brand-400" data-i18n="cert_1">Iniciación al desarrollo con IA</h4>
-                            <span class="font-mono text-xs text-ui-600 dark:text-ui-400">2025</span>
-                        </div>
-                        <p class="text-sm text-brand-600 dark:text-brand-400 flex justify-between items-center">BIG School <span class="text-xs text-ui-500 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">Ver PDF ↗</span></p>
-                    </a>
-
-                    <!-- Cert Alura con PDF -->
-                    <a href="assets/inmersion IA gemini.pdf" target="_blank" class="stagger-item flex flex-col gap-1 p-4 bg-white dark:bg-ui-900/50 rounded-lg shadow-sm border border-ui-200 dark:border-ui-800 hover:border-brand-500 transition-colors group">
-                        <div class="flex justify-between items-start">
-                            <h4 class="font-bold text-base m-0 text-ui-900 dark:text-ui-50 group-hover:text-brand-600 dark:group-hover:text-brand-400" data-i18n="cert_2">Inmersión IA con Google Gemini</h4>
-                            <span class="font-mono text-xs text-ui-600 dark:text-ui-400">2025</span>
-                        </div>
-                        <p class="text-sm text-brand-600 dark:text-brand-400 flex justify-between items-center">Alura <span class="text-xs text-ui-500 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">Ver PDF ↗</span></p>
-                    </a>
-
-                    <!-- Cert Codo a Codo -->
-                    <a href="assets/Diploma_CAC.pdf" target="_blank" class="stagger-item flex flex-col gap-1 p-4 bg-white dark:bg-ui-900/50 rounded-lg shadow-sm border border-ui-200 dark:border-ui-800 hover:border-brand-500 transition-colors group">
-                        <div class="flex justify-between items-start">
-                            <h4 class="font-bold text-base m-0 text-ui-900 dark:text-ui-50 group-hover:text-brand-600 dark:group-hover:text-brand-400" data-i18n="cert_3">Desarrollador Web (Javascript/Node.js)</h4>
-                            <span class="font-mono text-xs text-ui-600 dark:text-ui-400">2024</span>
-                        </div>
-                        <p class="text-sm text-brand-600 dark:text-brand-400 flex justify-between items-center">Codo a Codo 4.0 <span class="text-xs text-ui-500 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">Ver PDF ↗</span></p>
-                    </a>
-                </div>
+            <p class="text-slate-400 text-xs">Previsto 2026/2027 · Arquitectura empresarial, testing, modelado.</p>
+          </div>
+          <div class="glass p-5 rounded-xl card-hover">
+            <div class="flex justify-between items-start mb-2">
+              <h4 class="font-bold text-white text-sm">Técnico Superior en Desarrollo de Software</h4>
+              <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-mono text-[10px]">Graduado 2025</span>
             </div>
-        </section>
+            <p class="text-slate-400 text-xs">ISFT N°204 · POO (Java/C++), bases de datos, UML, ingeniería de software.</p>
+          </div>
+        </div>
+        <div class="space-y-4">
+          <h3 class="text-lg font-bold text-white flex items-center gap-2"><i class="fa-solid fa-certificate text-accent-400"></i> Certificaciones</h3>
+          <div class="glass rounded-xl overflow-hidden">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-dark-950 text-slate-300 font-mono border-b border-slate-800">
+                <tr><th class="p-3">Especialidad</th><th class="p-3">Entidad</th><th class="p-3 text-right">Año</th></tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800/60 text-slate-300">
+                <tr><td class="p-3 font-semibold text-white">Desarrollo Avanzado con IA</td><td class="p-3 text-slate-400">BIG School & Brais Moure</td><td class="p-3 text-right font-mono text-brand-400">2026</td></tr>
+                <tr><td class="p-3 font-semibold text-white">Inmersión IA con Gemini</td><td class="p-3 text-slate-400">Alura Latam</td><td class="p-3 text-right font-mono text-brand-400">2025</td></tr>
+                <tr><td class="p-3 font-semibold text-white">Desarrollo Web Fullstack</td><td class="p-3 text-slate-400">Codo a Codo 4.0</td><td class="p-3 text-right font-mono text-brand-400">2024</td></tr>
+                <tr><td class="p-3 font-semibold text-white">Habilidades Blandas & Liderazgo</td><td class="p-3 text-slate-400">Codo a Codo 4.0</td><td class="p-3 text-right font-mono text-brand-400">2024</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <a href="assets/certificados/Inmersión_IA_Gemini.pdf" target="_blank" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-mono text-slate-300 flex items-center gap-2 transition-all"><i class="fa-solid fa-file-pdf text-red-400"></i> Cert. Gemini</a>
+            <a href="assets/certificados/Big_School_Desarrollo_IA.pdf" target="_blank" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-mono text-slate-300 flex items-center gap-2 transition-all"><i class="fa-solid fa-file-pdf text-red-400"></i> Cert. BIG School</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- SERVICES -->
-        <section id="servicios" class="stagger-container">
-            <h2 class="stagger-item"><span class="text-brand-600 dark:text-brand-400">03.</span> <span data-i18n="serv_title">Servicios</span></h2>
+  <!-- CONTACTO -->
+  <section id="contacto" class="py-16 border-b border-slate-800">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 text-brand-400 font-mono text-xs uppercase mb-3"><i class="fa-solid fa-envelope"></i> Contacto</div>
+      <h2 class="text-3xl font-extrabold text-white mb-4">¿Tenés un proyecto en mente?</h2>
+      <p class="text-slate-400 mb-8">Estoy disponible para proyectos freelance, posiciones de Tech Lead y consultoría en análisis de sistemas.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="mailto:maty_asaro@protonmail.com" class="px-6 py-3 rounded-xl bg-gradient-to-r from-brand-500 to-accent-500 text-dark-950 font-bold text-sm flex items-center gap-2 shadow-lg shadow-brand-500/20 transition-all"><i class="fa-solid fa-envelope"></i> maty_asaro@protonmail.com</a>
+        <a href="https://linkedin.com/in/matias-asaro-910305272" target="_blank" class="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-sm border border-slate-700 flex items-center gap-2 transition-all"><i class="fa-brands fa-linkedin text-sky-400"></i> LinkedIn</a>
+        <a href="https://github.com/Matiburon87" target="_blank" class="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-sm border border-slate-700 flex items-center gap-2 transition-all"><i class="fa-brands fa-github"></i> GitHub</a>
+      </div>
+    </div>
+  </section>
 
-            <p class="text-ui-700 dark:text-ui-300 max-w-3xl mt-4 stagger-item text-body" data-i18n="serv_subtitle">
-                Impulso tu negocio o proyecto con herramientas de inteligencia artificial reales, no humo. Integro IA, automatización y desarrollo web para que tengas un sistema que trabaja por vos.
-            </p>
+  <!-- FOOTER -->
+  <footer class="py-8 border-t border-slate-800 bg-dark-950 text-sm text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="flex items-center space-x-2">
+        <img src="assets/logo-shark.jpg" alt="Logo" class="w-6 h-6 rounded object-cover" onerror="if(!this.dataset.tried){this.dataset.tried=1;this.src='../assets/logo-shark.jpg';}">
+        <span>© 2026 Matías Alberto Asaro</span>
+      </div>
+      <p class="text-xs text-slate-600">Construido con vanilla JS · Tailwind CSS · ❤️</p>
+    </div>
+  </footer>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-                <!-- Service 1 -->
-                <div class="stagger-item rounded-xl border border-ui-200 dark:border-ui-800 bg-white dark:bg-ui-900/50 p-6 hover:border-brand-400 transition-colors">
-                    <div class="text-3xl mb-3">🤖</div>
-                    <h3 class="text-xl text-ui-900 dark:text-ui-50 mb-2" data-i18n="serv_1_title">IA para tu negocio</h3>
-                    <p class="text-sm text-ui-800 dark:text-ui-200" data-i18n="serv_1_desc">Integro modelos de IA, flujos automáticos y análisis de datos para automatizar tareas repetitivas, generar informes o atender clientes sin intervención humana.</p>
-                    <div class="flex flex-wrap gap-2 mt-4 font-mono text-xs text-ui-600 dark:text-ui-400">
-                        <span>n8n</span><span>AutoML</span><span>RAG</span><span>APIs IA</span>
-                    </div>
-                </div>
+  <!-- JAVASCRIPT -->
+  <script>
+    const projects = [
+      {
+        id: 1, name: "Saque de Meta MDP", category: "media", tech: ["nextjs", "firebase", "tailwind"],
+        url: "https://saquedemetamdp.com/", description: "Portal de noticias deportivas con streaming 24/7, CMS periodístico y medición de oyentes en tiempo real.",
+        longDescription: "Plataforma integral de medios masivos para periodismo deportivo con radio online continua. Implementa streaming inteligente con failover automático entre periodistas en vivo e Icecast/AutoDJ sin cortes auditivos. Mide oyentes concurrentes con Heartbeat cada 30s en Firebase.",
+        features: ["Modo Dual Automatizado (Icecast ↔ AutoDJ)", "Heartbeat Firebase cada 30s", "CMS periodístico desacoplado", "SEO dinámico + OpenGraph", "Autenticación de periodistas"],
+        screenshots: [
+          { src: "assets/screenshot-saquedemetamdp/Captura de pantalla 2026-04-15 004943.png", caption: "Home principal" },
+          { src: "assets/screenshot-saquedemetamdp/Captura de pantalla 2026-04-15 005115.png", caption: "Player de audio en vivo" },
+          { src: "assets/screenshot-saquedemetamdp/Captura de pantalla 2026-04-15 005132.png", caption: "Portal de noticias" },
+          { src: "assets/screenshot-saquedemetamdp/Captura de pantalla 2026-04-15 005217.png", caption: "Categorías deportivas" },
+          { src: "assets/screenshot-saquedemetamdp/Captura de pantalla 2026-04-15 005242.png", caption: "Lectura de noticias" },
+          { src: "assets/screenshot-saquedemetamdp/Captura de pantalla 2026-04-15 005301.png", caption: "CMS periodístico" }
+        ], color: "sky"
+      },
+      {
+        id: 2, name: "Isadora Petshop", category: "ecommerce", tech: ["react", "nodejs", "mysql", "tailwind"],
+        url: "https://isadora.ninnotech.com/store", description: "E-commerce fullstack con +600 productos, pagos QR, panel admin y reportes de venta.",
+        longDescription: "Solución completa de comercio electrónico y administración de stock para tienda de mascotas. Modelo de datos transaccional MySQL para consistencia de inventario, integración de pasarela de pagos QR con Mercado Pago API, y dashboard operativo POS para dueños.",
+        features: ["+600 productos con stock en tiempo real", "Pagos QR vía Mercado Pago API", "Panel admin con reportes por período", "Control de stock concurrente", "Checkout con webhook de confirmación"],
+        screenshots: [
+          { src: "assets/screenshot-isadora/isadora principal.jpg", caption: "Tienda principal" },
+          { src: "assets/screenshot-isadora/isadora filtros busqueda.jpg", caption: "Filtros y búsqueda" },
+          { src: "assets/screenshot-isadora/isadora carrito.jpg", caption: "Carrito de compras" },
+          { src: "assets/screenshot-isadora/isadora contacto.jpg", caption: "Contacto y ubicación" },
+          { src: "assets/screenshot-isadora/isadora admin.jpg", caption: "Panel administrativo POS" }
+        ], color: "emerald"
+      },
+      {
+        id: 3, name: "Aldosivi Data Center", category: "dashboard", tech: ["nextjs", "typescript", "prisma", "tailwind"],
+        url: "https://estadisticas-aldosivi.vercel.app/", description: "Dashboard táctico para cuerpo técnico: xG, pases, posesión y diagnóstico vs. liga AFA.",
+        longDescription: "Centro de inteligencia deportiva para el cuerpo técnico de Israel Damonte (Primera División AFA). Procesa planillas PDF LPF y datos en tiempo real para emitir métricas de diagnóstico comparativo vs. la liga.",
+        features: ["Análisis colectivo vs. Liga AFA", "Radiografía de 11 jugadores con filtros", "Cronología de 7 partidos oficiales", "Parser de informes PDF LPF", "Diagnóstico táctico automatizado (4 nodos)"],
+        screenshots: [
+          { src: "assets/screenshot-estadisticas aldosivi/Captura de pantalla 2026-04-15 005954.png", caption: "Dashboard táctico principal" },
+          { src: "assets/screenshot-estadisticas aldosivi/Captura de pantalla 2026-04-15 010017.png", caption: "Estadísticas colectivas vs Liga" },
+          { src: "assets/screenshot-estadisticas aldosivi/Captura de pantalla 2026-04-15 010051.png", caption: "Cronología de partidos" },
+          { src: "assets/screenshot-estadisticas aldosivi/Captura de pantalla 2026-04-15 010104.png", caption: "Análisis individual jugadores" },
+          { src: "assets/screenshot-estadisticas aldosivi/Captura de pantalla 2026-04-15 010126.png", caption: "Tabla de promedios" },
+          { src: "assets/screenshot-estadisticas aldosivi/Captura de pantalla 2026-04-15 010144.png", caption: "Gráficos de rendimiento" },
+          { src: "assets/screenshot-estadisticas aldosivi/Captura de pantalla 2026-04-15 010159.png", caption: "Evaluación DT" },
+          { src: "assets/screenshot-estadisticas aldosivi/Captura de pantalla 2026-04-15 010219.png", caption: "Carga PDF LPF" }
+        ], color: "amber"
+      },
+      {
+        id: 4, name: "Campaña Socios Aldosivi", category: "dashboard", tech: ["tailwind", "javascript"],
+        url: "https://campa-a-socios-aldosivi.vercel.app/", description: "Simulador ROI financiero + sistema WhatsApp anti-ban para recuperación de 1.200 deudores.",
+        longDescription: "Plataforma estratégica para la dirigencia del Club Aldosivi. Cuantifica un ROI de $273.6M/año recuperando el 50% de 1.200 deudores. Incluye 8 scripts anti-ban para WhatsApp, kit de prensa, guiones de video y plan de acción.",
+        features: ["Simulador financiero interactivo", "8 scripts WhatsApp anti-ban", "Segmentación de deudores (1-5 meses)", "Kit de prensa + copys para redes", "4 guiones de video con storyboard"],
+        screenshots: [
+          { src: "assets/screenshot-campaña socios/Captura de pantalla 2026-09-02 144316.png", caption: "Simulador ROI" },
+          { src: "assets/screenshot-campaña socios/Captura de pantalla 2026-09-02 144354.png", caption: "Segmentación deudores" },
+          { src: "assets/screenshot-campaña socios/Captura de pantalla 2026-09-02 144432.png", caption: "Scripts WhatsApp" },
+          { src: "assets/screenshot-campaña socios/Captura de pantalla 2026-09-02 144457.png", caption: "Kit de prensa" }
+        ], color: "purple"
+      },
+      {
+        id: 5, name: "Estudio Arquitectura PC", category: "landing", tech: ["tailwind", "javascript"],
+        url: "https://estudioarquitecturapc.com/", description: "Landing page optimizada para performance, lead generation vía WhatsApp y anti-bots nativo.",
+        longDescription: "Landing page profesional optimizada para Core Web Vitals 100/100. Generación de leads vía WhatsApp Business con protección anti-bots nativa sin CAPTCHAs intrusivos.",
+        features: ["Lead generation vía WhatsApp", "Protección anti-bots nativa", "Lighthouse 100 en Performance", "Diseño UI profesional responsive"],
+        screenshots: [
+          { src: "assets/screenshot-P C Arquitectura/pc arquitectura.jpg", caption: "Landing principal" }
+        ], color: "teal"
+      },
+      {
+        id: 6, name: "Puerto Peli-Series", category: "app", tech: ["react", "tailwind"],
+        url: "https://puerto-peli-series.netlify.app/", description: "App de exploración de catálogos multimedia con APIs externas, debounce y UI responsive.",
+        longDescription: "Aplicación para exploración de catálogos de series y películas con integración de APIs externas. UI responsive con debounce en búsquedas, paginación inteligente y páginas de detalle dinámicas.",
+        features: ["Consumo de REST APIs externas", "Debounce en búsquedas", "Paginación inteligente", "UI responsive (mobile-first)"],
+        screenshots: [
+          { src: "assets/screenshot-puerto pelis/principal.jpg", caption: "Catálogo principal" },
+          { src: "assets/screenshot-puerto pelis/populares.jpg", caption: "Sección populares" }
+        ], color: "indigo"
+      }
+    ];
 
-                <!-- Service 2 -->
-                <div class="stagger-item rounded-xl border border-ui-200 dark:border-ui-800 bg-white dark:bg-ui-900/50 p-6 hover:border-brand-400 transition-colors">
-                    <div class="text-3xl mb-3">🗂️</div>
-                    <h3 class="text-xl text-ui-900 dark:text-ui-50 mb-2" data-i18n="serv_2_title">Vaults & Agentes IA</h3>
-                    <p class="text-sm text-ui-800 dark:text-ui-200" data-i18n="serv_2_desc">Creo bóvedas de conocimiento conectadas a tus documentos y datos, y agentes autónomos que responden, ejecutan tareas y coordinan workflows 24/7.</p>
-                    <div class="flex flex-wrap gap-2 mt-4 font-mono text-xs text-ui-600 dark:text-ui-400">
-                        <span>Obsidian</span><span>RAG</span><span>Agents</span><span>MCP</span>
-                    </div>
-                </div>
+    let currentFilter = 'todos';
+    let currentTech = null;
 
-                <!-- Service 3 -->
-                <div class="stagger-item rounded-xl border border-ui-200 dark:border-ui-800 bg-white dark:bg-ui-900/50 p-6 hover:border-brand-400 transition-colors">
-                    <div class="text-3xl mb-3">💬</div>
-                    <h3 class="text-xl text-ui-900 dark:text-ui-50 mb-2" data-i18n="serv_3_title">Chatbots inteligentes</h3>
-                    <p class="text-sm text-ui-800 dark:text-ui-200" data-i18n="serv_3_desc">Asistentes conversacionales entrenados con tu información: ventas, soporte, turnos o presupuestos. Funcionan en web, WhatsApp o Telegram.</p>
-                    <div class="flex flex-wrap gap-2 mt-4 font-mono text-xs text-ui-600 dark:text-ui-400">
-                        <span>LLMs</span><span>Embeddings</span><span>WhatsApp</span><span>Telegram</span>
-                    </div>
-                </div>
-
-                <!-- Service 4 -->
-                <div class="stagger-item rounded-xl border border-ui-200 dark:border-ui-800 bg-white dark:bg-ui-900/50 p-6 hover:border-brand-400 transition-colors">
-                    <div class="text-3xl mb-3">⚙️</div>
-                    <h3 class="text-xl text-ui-900 dark:text-ui-50 mb-2" data-i18n="serv_4_title">Skills & Tools / Automatización</h3>
-                    <p class="text-sm text-ui-800 dark:text-ui-200" data-i18n="serv_4_desc">Desarrollo skills y herramientas a medida que se conectan entre sí: scraping, informes, control de datos, alarmas y todo lo que puedas imaginar.</p>
-                    <div class="flex flex-wrap gap-2 mt-4 font-mono text-xs text-ui-600 dark:text-ui-400">
-                        <span>Python</span><span>APIs</span><span>Cron</span><span>Webhooks</span>
-                    </div>
-                </div>
+    function renderProjects() {
+      const grid = document.getElementById('projectsGrid');
+      const filtered = projects.filter(p => {
+        const catMatch = currentFilter === 'todos' || p.category === currentFilter;
+        const techMatch = !currentTech || p.tech.includes(currentTech);
+        return catMatch && techMatch;
+      });
+      grid.innerHTML = filtered.map((p, i) => `
+        <div class="project-card glass rounded-2xl overflow-hidden cursor-pointer card-hover animate-fade-in" style="animation-delay:${i*0.1}s" onclick="openModal(${p.id})">
+          <div class="relative h-48 bg-gradient-to-br from-${p.color}-500/20 to-${p.color}-900/20 flex items-center justify-center overflow-hidden">
+            ${p.screenshots.length > 0 ? `<img src="${p.screenshots[0].src}" alt="${p.name}" class="w-full h-full object-cover" onerror="if(!this.dataset.tried){this.dataset.tried=1;this.src='../'+'${p.screenshots[0].src}';}else{this.parentElement.innerHTML='<i class=\\'fa-solid fa-image text-4xl text-slate-600\\'></i>';}">` : `<i class="fa-solid fa-image text-4xl text-slate-600"></i>`}
+            <div class="project-overlay absolute inset-0 bg-dark-900/80 flex items-center justify-center">
+              <span class="px-4 py-2 rounded-lg bg-brand-500 text-dark-950 font-bold text-sm"><i class="fa-solid fa-eye mr-2"></i>Ver (${p.screenshots.length} fotos)</span>
             </div>
-        </section>
-
-        <!-- PROJECTS -->
-        <section id="proyectos" class="stagger-container">
-            <h2 class="stagger-item"><span class="text-brand-600 dark:text-brand-400">04.</span> <span data-i18n="proj_title">Proyectos</span></h2>
-            
-            <div class="mt-12 space-y-24">
-                <!-- Featured: Isadora -->
-                <article class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center stagger-item">
-                    <div class="lg:col-span-7 relative z-10 lg:order-2">
-                        <div class="proj-img-wrap aspect-[16/10] shadow-lg border border-ui-200 dark:border-ui-700" id="isadora-carousel" style="position:relative">
-                            <div class="carousel-viewport h-full">
-                                <div class="carousel-track h-full" id="isadora-track">
-                                    <img src="assets/screenshot-isadora/isadora principal.jpg" alt="Isadora Petshop — Página principal" loading="lazy">
-                                    <img src="assets/screenshot-isadora/isadora filtros busqueda.jpg" alt="Isadora Petshop — Filtros" loading="lazy">
-                                    <img src="assets/screenshot-isadora/isadora carrito.jpg" alt="Isadora Petshop — Carrito" loading="lazy">
-                                    <img src="assets/screenshot-isadora/isadora contacto.jpg" alt="Isadora Petshop — Contacto" loading="lazy">
-                                    <img src="assets/screenshot-isadora/isadora admin.jpg" alt="Isadora Petshop — Admin" loading="lazy">
-                                </div>
-                            </div>
-                            <button class="carousel-btn prev" id="isadora-prev" aria-label="Anterior">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
-                            </button>
-                            <button class="carousel-btn next" id="isadora-next" aria-label="Siguiente">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                            </button>
-                            <div class="carousel-dots" id="isadora-dots"></div>
-                            <a href="https://isadora.ninnotech.com/store" target="_blank" rel="noopener" class="proj-hover-overlay" aria-label="Ver sitio en vivo" style="pointer-events:none" id="isadora-link">
-                                <span class="proj-hover-label">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                                    Ver sitio en vivo
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="lg:col-span-5 relative z-20 space-y-4 lg:order-1 lg:text-left">
-                        <p class="label-mono text-brand-600 dark:text-brand-400">Featured Project</p>
-                        <h3 class="text-2xl text-ui-900 dark:text-ui-50">Isadora Petshop</h3>
-                        <div class="p-6 bg-white dark:bg-ui-900/90 backdrop-blur rounded-lg shadow-xl border border-ui-200 dark:border-ui-700">
-                            <p class="text-sm text-ui-800 dark:text-ui-200" data-i18n="proj_1_desc">
-                                Plataforma E-commerce Fullstack desde cero. Inventario completo para gestión, pagos por QR rápido, y admin dashboard seguro con reportes de venta a medida.
-                            </p>
-                        </div>
-                        <div class="flex gap-4 font-mono text-xs text-ui-600 dark:text-ui-400">
-                            <span>React</span><span>Node.js</span><span>MySQL</span><span>Tailwind</span>
-                        </div>
-                    </div>
-                </article>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Project 2: Puerto Peli -->
-                    <article class="rounded-xl border border-ui-200 dark:border-ui-800 overflow-hidden hover:-translate-y-2 transition-transform duration-300 stagger-item flex flex-col bg-white dark:bg-ui-900/50">
-                        <div class="proj-img-wrap h-48">
-                            <img src="assets/screenshot-puerto pelis/principal.jpg" alt="Puerto Peli-Series — Principal" loading="lazy">
-                            <a href="https://puerto-peli-series.netlify.app/" target="_blank" rel="noopener" class="proj-hover-overlay" aria-label="Ver sitio en vivo">
-                                <span class="proj-hover-label">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                                    Ver en vivo
-                                </span>
-                            </a>
-                        </div>
-                        <div class="p-6 flex flex-col flex-grow">
-                            <h3 class="text-lg mb-2 text-ui-900 dark:text-ui-50">Puerto Peli-Series</h3>
-                            <p class="text-sm text-ui-800 dark:text-ui-200 flex-grow" data-i18n="proj_2_desc">
-                                Aplicación para exploración de catálogos multimedia con APIs externas. Incluye UI responsive, debounce en las búsquedas y páginas de detalle dinámicas.
-                            </p>
-                            <div class="font-mono text-xs text-ui-600 dark:text-ui-400 mt-4 flex gap-3"><span>React</span> <span>REST API</span> <span>CSS3</span></div>
-                        </div>
-                    </article>
-
-                    <!-- Project 3: Estudio Arquitectura -->
-                    <article class="rounded-xl border border-ui-200 dark:border-ui-800 overflow-hidden hover:-translate-y-2 transition-transform duration-300 stagger-item flex flex-col bg-white dark:bg-ui-900/50">
-                        <div class="proj-img-wrap h-48">
-                            <img src="assets/screenshot-P C Arquitectura/pc arquitectura.jpg" alt="Estudio Arquitectura PC — Landing" loading="lazy">
-                            <a href="https://estudioarquitecturapc.vercel.app/" target="_blank" rel="noopener" class="proj-hover-overlay" aria-label="Ver sitio en vivo">
-                                <span class="proj-hover-label">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                                    Ver en vivo
-                                </span>
-                            </a>
-                        </div>
-                        <div class="p-6 flex flex-col flex-grow">
-                            <h3 class="text-lg mb-2 text-ui-900 dark:text-ui-50">Estudio Arquitectura PC</h3>
-                            <p class="text-sm text-ui-800 dark:text-ui-200 flex-grow" data-i18n="proj_3_desc">
-                                Landing page profesional optimizada para performance y lead generation vía WhatsApp, incluyendo protección anti-bots nativa.
-                            </p>
-                            <div class="font-mono text-xs text-ui-600 dark:text-ui-400 mt-4 flex gap-3"><span>HTML5</span> <span>JS</span> <span>Tailwind</span></div>
-                        </div>
-                    </article>
-                </div>
-
-                <!-- Featured: Saque de Meta -->
-                <article class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center stagger-item">
-                    <div class="lg:col-span-7 relative z-10 lg:order-1">
-                        <div class="proj-img-wrap aspect-[16/10] shadow-lg border border-ui-200 dark:border-ui-700" id="saquedemeta-carousel" style="position:relative">
-                            <div class="carousel-viewport h-full">
-                                <div class="carousel-track h-full" id="saquedemeta-track">
-                                    <img src="assets/screenshot-saquedemetamdp/Captura de pantalla 2026-04-15 004943.png" alt="Saque de Meta — Página principal" loading="lazy">
-                                    <img src="assets/screenshot-saquedemetamdp/Captura de pantalla 2026-04-15 005132.png" alt="Saque de Meta — Sección noticias" loading="lazy">
-                                    <img src="assets/screenshot-saquedemetamdp/Captura de pantalla 2026-04-15 005115.png" alt="Saque de Meta — Radio" loading="lazy">
-                                    <img src="assets/screenshot-saquedemetamdp/Captura de pantalla 2026-04-15 005217.png" alt="Saque de Meta — Categorías" loading="lazy">
-                                    <img src="assets/screenshot-saquedemetamdp/Captura de pantalla 2026-04-15 005242.png" alt="Saque de Meta — Artículo" loading="lazy">
-                                    <img src="assets/screenshot-saquedemetamdp/Captura de pantalla 2026-04-15 005301.png" alt="Saque de Meta — CMS Admin" loading="lazy">
-                                </div>
-                            </div>
-                            <button class="carousel-btn prev" id="saquedemeta-prev" aria-label="Anterior">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
-                            </button>
-                            <button class="carousel-btn next" id="saquedemeta-next" aria-label="Siguiente">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                            </button>
-                            <div class="carousel-dots" id="saquedemeta-dots"></div>
-                            <a href="https://saquedemetamdp.com" target="_blank" rel="noopener" class="proj-hover-overlay" aria-label="Ver sitio en vivo" style="pointer-events:none" id="saquedemeta-link">
-                                <span class="proj-hover-label">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                                    Ver sitio en vivo
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="lg:col-span-5 relative z-20 space-y-4 lg:order-2 lg:text-left">
-                        <p class="label-mono text-brand-600 dark:text-brand-400">Featured Project</p>
-                        <h3 class="text-2xl text-ui-900 dark:text-ui-50">Saque de Meta MDP</h3>
-                        <div class="p-6 bg-white dark:bg-ui-900/90 backdrop-blur rounded-lg shadow-xl border border-ui-200 dark:border-ui-700">
-                            <p class="text-sm text-ui-800 dark:text-ui-200" data-i18n="proj_4_desc">
-                                Portal de noticias deportivas fullstack con CMS propio y radio en streaming 24/7. Incluye autenticación de periodistas, gestor de contenido dinámico, SEO estructurado y player de audio con AutoDJ.
-                            </p>
-                        </div>
-                        <div class="flex gap-4 font-mono text-xs text-ui-600 dark:text-ui-400">
-                            <span>Next.js</span><span>Firebase</span><span>Tailwind</span><span>laut.fm</span>
-                        </div>
-                        <a href="https://saquedemetamdp.com/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 label-mono text-ui-600 dark:text-ui-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors text-xs pt-1">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                            Ver sitio en vivo ↗
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Featured: Estadísticas Aldosivi -->
-                <article class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center stagger-item">
-                    <div class="lg:col-span-7 relative z-10 lg:order-2">
-                        <div class="proj-img-wrap aspect-[16/10] shadow-lg border border-ui-200 dark:border-ui-700" id="aldosivi-carousel" style="position:relative">
-                            <div class="carousel-viewport h-full">
-                                <div class="carousel-track h-full" id="aldosivi-track">
-                                    <img src="assets/screenshot-estadisticas aldosivi/Captura de pantalla 2026-04-15 005954.png" alt="Aldosivi Dashboard — Principal" loading="lazy">
-                                    <img src="assets/screenshot-estadisticas aldosivi/Captura de pantalla 2026-04-15 010017.png" alt="Aldosivi Dashboard — Estadísticas" loading="lazy">
-                                    <img src="assets/screenshot-estadisticas aldosivi/Captura de pantalla 2026-04-15 010051.png" alt="Aldosivi Dashboard — Partidos" loading="lazy">
-                                    <img src="assets/screenshot-estadisticas aldosivi/Captura de pantalla 2026-04-15 010104.png" alt="Aldosivi Dashboard — Plantilla" loading="lazy">
-                                    <img src="assets/screenshot-estadisticas aldosivi/Captura de pantalla 2026-04-15 010126.png" alt="Aldosivi Dashboard — Descenso" loading="lazy">
-                                    <img src="assets/screenshot-estadisticas aldosivi/Captura de pantalla 2026-04-15 010144.png" alt="Aldosivi Dashboard — Gráficos" loading="lazy">
-                                    <img src="assets/screenshot-estadisticas aldosivi/Captura de pantalla 2026-04-15 010159.png" alt="Aldosivi Dashboard — Candidatos DT" loading="lazy">
-                                    <img src="assets/screenshot-estadisticas aldosivi/Captura de pantalla 2026-04-15 010219.png" alt="Aldosivi Dashboard — Upload PDF" loading="lazy">
-                                </div>
-                            </div>
-                            <button class="carousel-btn prev" id="aldosivi-prev" aria-label="Anterior">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
-                            </button>
-                            <button class="carousel-btn next" id="aldosivi-next" aria-label="Siguiente">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                            </button>
-                            <div class="carousel-dots" id="aldosivi-dots"></div>
-                        </div>
-                    </div>
-
-                    <div class="lg:col-span-5 relative z-20 space-y-4 lg:order-1 lg:text-left">
-                        <p class="label-mono text-brand-600 dark:text-brand-400">Featured Project</p>
-                        <h3 class="text-2xl text-ui-900 dark:text-ui-50">Estadísticas Aldosivi</h3>
-                        <div class="p-6 bg-white dark:bg-ui-900/90 backdrop-blur rounded-lg shadow-xl border border-ui-200 dark:border-ui-700">
-                            <p class="text-sm text-ui-800 dark:text-ui-200" data-i18n="proj_5_desc">
-                                Centro de inteligencia deportiva para el cuerpo técnico del Club Atlético Aldosivi. Dashboard con visualización de métricas de rendimiento, tabla de descenso, plantilla, historial de partidos y parser de informes PDF.
-                            </p>
-                        </div>
-                        <div class="flex gap-4 font-mono text-xs text-ui-600 dark:text-ui-400">
-                            <span>Next.js 16</span><span>TypeScript</span><span>Recharts</span><span>Prisma</span>
-                        </div>
-                        <a href="https://estadisticas-clubaldosivi.netlify.app/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 label-mono text-ui-600 dark:text-ui-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors text-xs pt-1">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                            Ver sitio en vivo ↗
-                        </a>
-                    </div>
-                </article>
+          </div>
+          <div class="p-5">
+            <div class="flex items-start justify-between gap-2 mb-2">
+              <h3 class="font-bold text-white text-lg leading-tight">${p.name}</h3>
+              <a href="${p.url}" target="_blank" class="text-slate-400 hover:text-brand-400 transition-colors" onclick="event.stopPropagation()"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
             </div>
-        </section>
-    </main>
+            <p class="text-slate-400 text-xs leading-relaxed mb-3">${p.description}</p>
+            <div class="flex flex-wrap gap-1.5">${p.tech.map(t => `<span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-400">${t}</span>`).join('')}</div>
+          </div>
+        </div>
+      `).join('');
+    }
 
-    <!-- FOOTER -->
-    <footer class="text-center py-8 text-sm font-mono text-ui-500 dark:text-ui-500 space-y-2">
-        <p>Built by Matías Asaro &middot; 2026</p>
-        <p>Mar del Plata, ARG</p>
-    </footer>
+    function openModal(id) {
+      const p = projects.find(x => x.id === id);
+      if (!p) return;
+      document.getElementById('modalTitle').textContent = p.name;
+      document.getElementById('modalContent').innerHTML = `
+        <div class="space-y-6">
+          <div class="flex flex-wrap gap-2">
+            <a href="${p.url}" target="_blank" class="px-4 py-2 rounded-lg bg-brand-500 hover:bg-brand-400 text-dark-950 font-bold text-sm flex items-center gap-2 transition-all"><i class="fa-solid fa-external-link"></i> Visitar Sitio</a>
+            ${p.tech.map(t => `<span class="px-3 py-1.5 rounded-lg bg-slate-800 text-xs font-mono text-slate-300">${t}</span>`).join('')}
+          </div>
+          <p class="text-slate-300 leading-relaxed">${p.longDescription}</p>
+          <div><h4 class="font-bold text-white mb-3 flex items-center gap-2"><i class="fa-solid fa-list-check text-brand-400"></i> Características Técnicas</h4><ul class="space-y-2">${p.features.map(f => `<li class="flex items-start gap-2 text-sm text-slate-300"><i class="fa-solid fa-check text-brand-400 mt-0.5"></i><span>${f}</span></li>`).join('')}</ul></div>
+          ${p.screenshots.length > 0 ? `<div><div class="flex items-center justify-between mb-3"><h4 class="font-bold text-white flex items-center gap-2"><i class="fa-solid fa-images text-brand-400"></i> Capturas (${p.screenshots.length})</h4><span class="text-xs text-slate-400 font-mono">Desliza →</span></div><div class="screenshot-carousel flex gap-4 overflow-x-auto pb-4">${p.screenshots.map((s, idx) => `<div class="flex-shrink-0 w-80"><div class="overflow-hidden rounded-xl border border-slate-700 bg-slate-900"><img src="${s.src}" alt="${s.caption}" class="w-full h-48 object-cover hover:scale-105 transition-transform duration-300" onerror="if(!this.dataset.tried){this.dataset.tried=1;this.src='../'+'${s.src}';}"></div><p class="text-xs text-slate-300 mt-2 text-center font-medium"><span class="text-brand-400 font-mono text-[10px]">[${idx+1}/${p.screenshots.length}]</span> ${s.caption}</p></div>`).join('')}</div></div>` : ''}
+        </div>`;
+      document.getElementById('projectModal').classList.remove('hidden');
+      document.getElementById('projectModal').classList.add('flex');
+    }
 
-    <!-- LOGIC (Translations & Theme/Menu) -->
-    <script>
-        // i18n
-        const dict = {
-            'es': {
-                'skip_link': 'Saltar al contenido principal',
-                'nav_about': 'Sobre Mí', 'nav_experience': 'Experiencia', 'nav_education': 'Educación', 'nav_projects': 'Proyectos',
-                'mob_about': '01. Sobre Mí', 'mob_experience': '02. Experiencia', 'mob_services': '03. Servicios', 'mob_projects': '04. Proyectos',
-                'download_cv': 'Ver CV .pdf',
-                'nav_services': 'Servicios',
-                'status': 'Disponible para trabajar',
-                'headline': 'Desarrollador Fullstack & Team Lead.',
-                'hero_desc': 'Construyo aplicaciones web fullstack y lidero equipos de desarrollo. Aporto <strong class="text-ui-950 dark:text-white font-medium">+10 años de experiencia liderando equipos en entornos de alta presión</strong>,ahora quiero aplicarlo a la ingeniería de software. Graduado reciente que conecta ejecución técnica con coordinación estratégica.',
-                'btn_contact': 'Contactame', 'btn_cv': 'Ver CV',
-                'exp_title': 'Experiencia Profesional',
-                'exp_date_1': '2024 — Presente', 'exp_role_1': 'Desarrollador Fullstack & Team Lead',
-                'exp_1_li1': 'Arquitectura y desarrollo plataforma E-commerce (Stock, Pagos QR, Panel admin).',
-                'exp_1_li2': 'Creación de landing pages orientadas a negocios, enfocadas en conversión y performance.',
-                'exp_1_li3': 'Automatización de procesos (n8n) e integraciones de flujos IA.',
-                'exp_1_li4': 'Liderazgo técnico en proyectos colaborativos y mentoría de desarrolladores junior.',
-                'exp_date_2': '2014 — Presente (Noche)', 'exp_role_2': 'Croupier',
-                'exp_2_note_title': 'Liderazgo bajo presión:', 'exp_2_note_desc': 'Coordinación de equipos (+20 personas) y toma de decisiones financieras en tiempo real.',
-                'exp_2_li1': 'Operador de mesa de BlackJack y Craps; requiere cálculo mental y ejecución en tiempo real.',
-                'exp_2_li2': 'Delegado sindical: negociación de intereses de las partes, resolución de disputas.',
-                'exp_2_li3': 'Mediación de conflictos con clientes VIP demostrando gran comunicación asertiva.',
-                'edu_title': 'Formación & Cursos Completados', 
-                'serv_title': 'Servicios',
-                'serv_subtitle': 'Impulso tu negocio o proyecto con herramientas de inteligencia artificial reales, no humo. Integro IA, automatización y desarrollo web para que tengas un sistema que trabaja por vos.',
-                'serv_1_title': 'IA para tu negocio', 'serv_1_desc': 'Integro modelos de IA, flujos automáticos y análisis de datos para automatizar tareas repetitivas, generar informes o atender clientes sin intervención humana.',
-                'serv_2_title': 'Vaults & Agentes IA', 'serv_2_desc': 'Creo bóvedas de conocimiento conectadas a tus documentos y datos, y agentes autónomos que responden, ejecutan tareas y coordinan workflows 24/7.',
-                'serv_3_title': 'Chatbots inteligentes', 'serv_3_desc': 'Asistentes conversacionales entrenados con tu información: ventas, soporte, turnos o presupuestos. Funcionan en web, WhatsApp o Telegram.',
-                'serv_4_title': 'Skills & Tools / Automatización', 'serv_4_desc': 'Desarrollo skills y herramientas a medida que se conectan entre sí: scraping, informes, control de datos, alarmas y todo lo que puedas imaginar.',
-                'edu_expected': 'Previsto 2026/2027', 'edu_progress': 'Progreso actual',
-                'edu_grad': 'Graduado 2025', 'edu_tsds': 'Bases sólidas en POO (Java, C++), Bases de datos, UML, e Ingeniería del Software.',
-                'certs_title': 'Certificados Oficiales',
-                'cert_1': 'Iniciación al desarrollo con IA', 'cert_2': 'Inmersión IA con Google Gemini', 'cert_3': 'Desarrollador Web (Javascript/Node.js)',
-                'proj_title': 'Proyectos',
-                'proj_1_desc': 'Plataforma E-commerce Fullstack desde cero. Inventario completo para gestión, pagos por QR rápido, y admin dashboard seguro con reportes de venta a medida.',
-                'proj_2_desc': 'Aplicación para exploración de catálogos multimedia con APIs externas. Incluye UI responsive, debounce en las búsquedas y páginas de detalle dinámicas.',
-                'proj_3_desc': 'Landing page profesional optimizada para performance y lead generation vía WhatsApp, incluyendo protección anti-bots nativa.',
-                'proj_4_desc': 'Portal de noticias deportivas fullstack con CMS propio y radio en streaming 24/7. Incluye autenticación de periodistas, gestor de contenido dinámico, SEO estructurado y player de audio con AutoDJ.',
-                'proj_5_desc': 'Centro de inteligencia deportiva para el cuerpo técnico del Club Atlético Aldosivi. Dashboard con visualización de métricas de rendimiento, tabla de descenso, plantilla, historial de partidos y parser de informes PDF.'
-            },
-            'en': {
-                'skip_link': 'Skip to main content',
-                'nav_about': 'About', 'nav_experience': 'Experience', 'nav_education': 'Education', 'nav_projects': 'Projects',
-                'mob_about': '01. About', 'mob_experience': '02. Experience', 'mob_services': '03. Services', 'mob_projects': '04. Projects', 'mob_contact': 'Contact Me ↗',
-                'download_cv': 'View CV .pdf',
-                'nav_services': 'Services',
-                'status': 'Available for Work',
-                'headline': 'Software Developer & Team Lead.',
-                'hero_desc': 'I build fullstack web applications and lead development teams. Bringing <strong class="text-ui-950 dark:text-white font-medium">10+ years of high-pressure leadership experience</strong> to software engineering. Recent graduate connecting technical execution with team coordination.',
-                'btn_contact': 'Get In Touch', 'btn_cv': 'View CV',
-                'exp_title': 'Professional Experience',
-                'exp_date_1': '2024 — Present', 'exp_role_1': 'Fullstack Developer & Team Lead',
-                'exp_1_li1': 'Architected and developed a fullstack E-commerce platform (Inventory, QR Payments, Admin Panel).',
-                'exp_1_li2': 'Created business-focused landing pages optimized for conversions and performance.',
-                'exp_1_li3': 'Designed n8n automations and AI workflow integrations.',
-                'exp_1_li4': 'Acted as Technical Lead in collaborative academic projects, mentoring junior developers.',
-                'exp_date_2': '2014 — Present (Night Shift)', 'exp_role_2': 'Croupier',
-                'exp_2_note_title': 'Leadership Under Pressure:', 'exp_2_note_desc': 'Coordinated teams of 20+ people and made real-time financial decisions.',
-                'exp_2_li1': 'Table operator (BlackJack, Craps) requiring rapid mental calculation and execution.',
-                'exp_2_li2': 'Union delegate handling stakeholder negotiation, dispute resolution, and team advocacy.',
-                'exp_2_li3': 'Mediated financial conflicts with high-profile clients demonstrating assertive communication.',
-                'edu_title': 'Education & Continuous Learning',
-                'serv_title': 'Services',
-                'serv_subtitle': 'I boost your business with practical AI tools: automation, knowledge bases, intelligent agents, and custom chatbots that actually work.',
-                'serv_1_title': 'AI for your business', 'serv_1_desc': 'I integrate AI models, automated workflows, and data analysis to eliminate repetitive tasks, generate reports, or answer customers without human intervention.',
-                'serv_2_title': 'Vaults & AI Agents', 'serv_2_desc': 'I build knowledge bases connected to your documents and data, plus autonomous agents that respond, execute tasks, and coordinate 24/7 workflows.',
-                'serv_3_title': 'Smart Chatbots', 'serv_3_desc': 'Conversational assistants trained on your own data for sales, support, appointments, or quotes — on web, WhatsApp, or Telegram.',
-                'serv_4_title': 'Skills & Tools / Automation', 'serv_4_desc': 'I build custom skills and tools that connect together: scraping, reports, data monitoring, alerts, and whatever else you need.',
-                'edu_expected': 'Expected 2026/2027', 'edu_progress': 'Progress Tracking',
-                'edu_grad': 'Graduated 2025', 'edu_tsds': 'Comprehensive foundation in OOP (Java, C++), Database Design, UML, and Software Engineering.',
-                'certs_title': 'Certificates & Bootcamps',
-                'cert_1': 'AI Development Initiation', 'cert_2': 'Google Gemini AI Immersion', 'cert_3': 'Web Developer (Javascript/Node.js)',
-                'proj_title': 'Selected Projects',
-                'proj_1_desc': 'Full-stack e-commerce platform built from scratch. Features complete inventory management, QR payments, and a secure admin dashboard.',
-                'proj_2_desc': 'Multimedia catalog exploration application interacting with external movie DB APIs. Features responsive UI and debounced search.',
-                'proj_3_desc': 'Professional landing page designed for an architecture firm. Focuses on performance, WhatsApp integration, and anti-bot validation.',
-                'proj_4_desc': 'Fullstack sports news portal with a custom CMS and 24/7 radio streaming. Features journalist authentication, dynamic content management, structured SEO, and an AutoDJ audio player.',
-                'proj_5_desc': 'Sports intelligence hub for the Aldosivi Club coaching staff. Dashboard featuring performance metrics, relegation tracking, squad management, match history, and automated PDF report parsing.'
-            }
-        };
+    function closeModal() {
+      document.getElementById('projectModal').classList.add('hidden');
+      document.getElementById('projectModal').classList.remove('flex');
+    }
 
-        let currentLang = 'es';
-        function toggleLang() {
-            currentLang = currentLang === 'es' ? 'en' : 'es';
-            document.getElementById('lang-toggle').innerText = currentLang === 'es' ? 'EN' : 'ES'; 
-            document.documentElement.lang = currentLang;
-            
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (dict[currentLang][key]) {
-                    el.innerHTML = dict[currentLang][key]; // innerHTML allows bold tags
-                }
-            });
-        }
+    document.getElementById('projectModal').addEventListener('click', (e) => { if (e.target === document.getElementById('projectModal')) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
-        function toggleTheme() {
-            const html = document.documentElement;
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                localStorage.theme = 'light';
-            } else {
-                html.classList.add('dark');
-                localStorage.theme = 'dark';
-            }
-        }
-        
-        // Initial setup
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
+    document.getElementById('filterContainer').addEventListener('click', (e) => {
+      const btn = e.target.closest('.filter-btn');
+      if (!btn) return;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.dataset.filter;
+      renderProjects();
+    });
 
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            const toggle = document.getElementById('menu-toggle');
-            if (menu.classList.contains('hidden')) {
-                menu.classList.remove('hidden'); menu.classList.add('flex');
-                menu.removeAttribute('inert'); document.body.style.overflow = 'hidden';
-                toggle.setAttribute('aria-expanded', 'true');
-            } else {
-                menu.classList.add('hidden'); menu.classList.remove('flex');
-                menu.setAttribute('inert', ''); document.body.style.overflow = '';
-                toggle.setAttribute('aria-expanded', 'false');
-            }
-        }
-        function scrollToSection(id) { document.getElementById(id).scrollIntoView({ behavior: 'smooth' }); }
+    document.getElementById('techFilterContainer').addEventListener('click', (e) => {
+      const btn = e.target.closest('.tech-tag');
+      if (!btn) return;
+      document.querySelectorAll('.tech-tag').forEach(b => { b.classList.remove('bg-brand-500', 'text-dark-950'); b.classList.add('bg-slate-800', 'text-slate-400'); });
+      if (currentTech === btn.dataset.tech) { currentTech = null; }
+      else { currentTech = btn.dataset.tech; btn.classList.remove('bg-slate-800', 'text-slate-400'); btn.classList.add('bg-brand-500', 'text-dark-950'); }
+      renderProjects();
+    });
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); } });
-            }, { root: null, rootMargin: '0px', threshold: 0.1 });
-            document.querySelectorAll('.stagger-item').forEach(el => observer.observe(el));
-
-            // Generic arrow carousel factory
-            function initCarousel(trackId, prevId, nextId, dotsId, linkId, wrapId) {
-                const track    = document.getElementById(trackId);
-                const prevBtn  = document.getElementById(prevId);
-                const nextBtn  = document.getElementById(nextId);
-                const dotsWrap = document.getElementById(dotsId);
-                const link     = linkId ? document.getElementById(linkId) : null;
-                const imgs     = track ? track.querySelectorAll('img') : [];
-                let current    = 0;
-
-                if (!track || !imgs.length) return;
-
-                imgs.forEach((_, i) => {
-                    const d = document.createElement('div');
-                    d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-                    d.addEventListener('click', () => goTo(i));
-                    dotsWrap.appendChild(d);
-                });
-
-                function goTo(n) {
-                    current = (n + imgs.length) % imgs.length;
-                    track.style.transform = `translateX(-${current * 100}%)`;
-                    dotsWrap.querySelectorAll('.carousel-dot').forEach((d, i) =>
-                        d.classList.toggle('active', i === current));
-                }
-
-                prevBtn.addEventListener('click', e => { e.stopPropagation(); goTo(current - 1); });
-                nextBtn.addEventListener('click', e => { e.stopPropagation(); goTo(current + 1); });
-
-                if (link && wrapId) {
-                    const wrap = document.getElementById(wrapId);
-                    wrap.addEventListener('mouseenter', () => { link.style.pointerEvents = 'auto'; link.style.opacity = '1'; });
-                    wrap.addEventListener('mouseleave', () => { link.style.pointerEvents = 'none'; link.style.opacity = '0'; });
-                    [prevBtn, nextBtn].forEach(btn => {
-                        btn.addEventListener('mouseenter', e => { e.stopPropagation(); link.style.pointerEvents = 'none'; link.style.opacity = '0'; });
-                    });
-                }
-            }
-
-            // Init all carousels
-            initCarousel('isadora-track', 'isadora-prev', 'isadora-next', 'isadora-dots', 'isadora-link', 'isadora-carousel');
-            initCarousel('saquedemeta-track', 'saquedemeta-prev', 'saquedemeta-next', 'saquedemeta-dots', 'saquedemeta-link', 'saquedemeta-carousel');
-            initCarousel('aldosivi-track', 'aldosivi-prev', 'aldosivi-next', 'aldosivi-dots', null, null);
-        });
-    </script>
+    renderProjects();
+  </script>
 </body>
 </html>
